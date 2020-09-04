@@ -5,12 +5,12 @@ class SortedList<T> {
   }
   add(value: T) {
     this.list.push(value);
-    this.list.sort();
   }
   remove(value: T) {
     this.list.splice(this.indexOf(value), 1);
   }
   indexOf(value: T): number {
+    this.list.sort();
     let firstIndex = 0,
       lastIndex = this.list.length - 1,
       middleIndex = Math.floor((lastIndex + firstIndex) / 2);
@@ -25,6 +25,7 @@ class SortedList<T> {
     return this.list[middleIndex] !== value ? -1 : middleIndex;
   }
   includes(value: T): boolean {
+    this.list.sort();
     let firstIndex = 0,
       lastIndex = this.list.length - 1,
       middleIndex = Math.floor((lastIndex + firstIndex) / 2);
