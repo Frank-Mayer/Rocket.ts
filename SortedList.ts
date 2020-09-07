@@ -1,16 +1,36 @@
 class SortedList<T> {
   private list: Array<T>;
+  private hasChangedSinceLastSort: boolean;
+  public length: number;
   constructor() {
+    this.hasChangedSinceLastSort = false;
     this.list = new Array<T>();
+    this.length = 0;
   }
   add(value: T) {
+    this.length++;
     this.list.push(value);
+    this.hasChangedSinceLastSort = true;
   }
-  remove(value: T) {
-    this.list.splice(this.indexOf(value), 1);
+  remove(value: T): boolean {
+    let i = this.indexOf(value);
+    if (i >= 0) {
+      this.list.splice(i, 1);
+      this.hasChangedSinceLastSort = true;
+      this.length--;
+      return true;
+    }
+    return false;
   }
   indexOf(value: T): number {
-    this.list.sort();
+    if (this.length === 0) {
+      return -1;
+    }
+    if (this.hasChangedSinceLastSort) {
+      this.list.sort();
+      console.debug("sort");
+    }
+    this.hasChangedSinceLastSort = false;
     let firstIndex = 0,
       lastIndex = this.list.length - 1,
       middleIndex = Math.floor((lastIndex + firstIndex) / 2);
@@ -25,7 +45,14 @@ class SortedList<T> {
     return this.list[middleIndex] !== value ? -1 : middleIndex;
   }
   includes(value: T): boolean {
-    this.list.sort();
+    if (this.length === 0) {
+      return false;
+    }
+    if (this.hasChangedSinceLastSort) {
+      console.debug("sort");
+      this.list.sort();
+    }
+    this.hasChangedSinceLastSort = false;
     let firstIndex = 0,
       lastIndex = this.list.length - 1,
       middleIndex = Math.floor((lastIndex + firstIndex) / 2);
