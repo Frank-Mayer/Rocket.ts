@@ -4,7 +4,7 @@
 
 class SortedList<T> {
 
-- private list;
+- length;
 - constructor();
 - add(value: T): void;
 - remove(value: T): void;
@@ -13,4 +13,4 @@ class SortedList<T> {
 
 }
 
-function sleep(ms: number): Promise<unknown>;
+function sleep(ms: number): Promise<void>;
