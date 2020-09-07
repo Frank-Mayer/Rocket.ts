@@ -25,10 +25,11 @@ class SortedList<T> {
   indexOf(value: T): number {
     if (this.length === 0) {
       return -1;
+    } else if (this.length === 1 && this.list[0] === value) {
+      return 0;
     }
     if (this.hasChangedSinceLastSort) {
       this.list.sort();
-      console.debug("sort");
     }
     this.hasChangedSinceLastSort = false;
     let firstIndex = 0,
@@ -47,9 +48,10 @@ class SortedList<T> {
   includes(value: T): boolean {
     if (this.length === 0) {
       return false;
+    } else if (this.length === 1 && this.list[0] === value) {
+      return true;
     }
     if (this.hasChangedSinceLastSort) {
-      console.debug("sort");
       this.list.sort();
     }
     this.hasChangedSinceLastSort = false;
