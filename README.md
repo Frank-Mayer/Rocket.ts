@@ -1,16 +1,25 @@
 # TypeScriptSpeedupLibrary
 
-### TypeScript functions and classes for better performance
+## SortedList
 
-class SortedList<T> {
+- Gets sorted before lookup if an item has been added since the last sort
+- Much faster than array for many lookups but slower if it has to be re-sorted often
 
-- length;
-- constructor();
-- add(value: T): void;
-- remove(value: T): void;
-- indexOf(value: T): number;
-- includes(value: T): boolean;
-
+```
+const list = new SortedList<string>();
+list.add("foo");
+list.add("bar");
+list.add("baz");
+...
+if (list.includes("foobar")) {
+  ...
 }
+```
 
-function sleep(ms: number): Promise<void>;
+## sleep
+
+- Returns a promise that will be fulfilled when the specified time has passed
+
+```
+await sleep(500);
+```
