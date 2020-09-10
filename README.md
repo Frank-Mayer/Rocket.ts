@@ -1,4 +1,4 @@
-# TypeScriptSpeedupLibrary
+# TypedDataStructures
 
 ## SortedList
 
