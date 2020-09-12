@@ -7,6 +7,7 @@ String.prototype.hash = function () {
     chr = this.charCodeAt(i);
     hash = (hash << 5) - hash + chr;
     hash |= 0; // Convert to 32bit integer
+    hash += 2147483648;
   }
   return hash;
 };
