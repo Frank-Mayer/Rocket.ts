@@ -21,4 +21,8 @@ class Queue<T> {
       return undefined;
     }
   }
+
+  peek(): T | undefined {
+    return this.storage[0];
+  }
 }
