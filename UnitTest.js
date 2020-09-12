@@ -36,10 +36,10 @@ test(stack.peek(), "meep");
 test(stack.pop(), "meep");
 test(stack.length, 0);
 
-const Queue = new Queue();
-Queue.enqueue("dog");
-Queue.enqueue("cat");
-Queue.enqueue("bird");
-test(Queue.dequeue(), "dog");
-test(Queue.dequeue(), "cat");
-test(Queue.dequeue(), "bird");
+const queue = new Queue();
+queue.enqueue("dog");
+queue.enqueue("cat");
+queue.enqueue("bird");
+test(queue.dequeue(), "dog");
+test(queue.dequeue(), "cat");
+test(queue.dequeue(), "bird");
