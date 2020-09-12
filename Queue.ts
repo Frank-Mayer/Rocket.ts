@@ -1,4 +1,4 @@
-class Quere<T> {
+class Queue<T> {
   private storage: Array<T>;
   public length: number;
 

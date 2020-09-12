@@ -1,4 +1,4 @@
-import { HashTable, SortedList, Stack, Quere } from "./out/speedup.js";
+import { HashTable, SortedList, Stack, Queue } from "./out/speedup.js";
 
 const test = (operation, expectation) => {
   let result;
@@ -36,10 +36,10 @@ test(stack.peek(), "meep");
 test(stack.pop(), "meep");
 test(stack.length, 0);
 
-const quere = new Quere();
-quere.enqueue("dog");
-quere.enqueue("cat");
-quere.enqueue("bird");
-test(quere.dequeue(), "dog");
-test(quere.dequeue(), "cat");
-test(quere.dequeue(), "bird");
+const Queue = new Queue();
+Queue.enqueue("dog");
+Queue.enqueue("cat");
+Queue.enqueue("bird");
+test(Queue.dequeue(), "dog");
+test(Queue.dequeue(), "cat");
+test(Queue.dequeue(), "bird");
