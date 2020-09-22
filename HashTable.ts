@@ -86,6 +86,18 @@ class HashTable {
     return undefined;
   }
 
+  has(key: any): boolean {
+    let index = this.hash(key);
+    if (this.bucket[index]) {
+      for (let i = 0; i < this.bucket[index].length; i++) {
+        if (this.bucket[index][i][0] === key) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   toString(): string {
     let r = "{\n";
     for (const b of this.bucket) {
