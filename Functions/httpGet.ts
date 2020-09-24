@@ -1,4 +1,10 @@
-const httpGetCache = new HashTable(128);
+/// <reference path="../Classes/HashMap.ts"/>
+const httpGetCache = new HashMap(128);
+/**
+ *Sends an asynchronous http-get request to a given url
+ * @param url Url to send the request to
+ * @param cached Whether you want the response to be cached or not
+ */
 async function httpGet(url: string, cached: boolean = false) {
   return new Promise(function (
     resolve: (value: string) => void,

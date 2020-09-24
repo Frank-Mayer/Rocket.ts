@@ -2,16 +2,23 @@ class SortedList<T> {
   private list: Array<T>;
   private hasChangedSinceLastSort: boolean;
   public length: number;
+
   constructor() {
     this.hasChangedSinceLastSort = false;
     this.list = new Array<T>();
     this.length = 0;
   }
+
+  [Symbol.iterator]() {
+    return this.list.values();
+  }
+
   add(value: T) {
     this.length++;
     this.list.push(value);
     this.hasChangedSinceLastSort = true;
   }
+
   remove(value: T): boolean {
     let i = this.indexOf(value);
     if (i >= 0) {
@@ -22,6 +29,7 @@ class SortedList<T> {
     }
     return false;
   }
+
   indexOf(value: T): number {
     if (this.length === 0) {
       return -1;
@@ -45,6 +53,7 @@ class SortedList<T> {
     }
     return this.list[middleIndex] !== value ? -1 : middleIndex;
   }
+
   includes(value: T): boolean {
     if (this.length === 0) {
       return false;

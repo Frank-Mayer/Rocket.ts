@@ -1,16 +1,16 @@
-class HashTable {
+class HashMap {
   private bucket: any[][][];
   public length: number;
   private limit: number;
 
   constructor(size: number = 256) {
-    if (size < 1) throw new Error("HashTable size must be greater than 0");
+    if (size < 1) throw new Error("HashMap size must be greater than 0");
     this.bucket = new Array<Array<Array<any>>>();
     this.length = 0;
     this.limit = size;
   }
 
-  hash(value: any): number {
+  private hash(value: any): number {
     let hash = JSON.stringify(value).hash();
     return hash % this.limit;
   }
@@ -27,6 +27,7 @@ class HashTable {
         }
       }
       if (!inserted) {
+        console.debug("HashMap collision at Index " + index.toString());
         this.bucket[index].push([key, value]);
         this.length++;
       }

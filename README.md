@@ -1,34 +1,49 @@
-# TypedDataStructures
+# Rocket.ts
 
-## HashTable
+## Classes
 
-```
-const hashTable = new HashTable();
-const key0 = ["domplin"];
-const key1 = 5;
-hashTable.set(key0, 33);
-hashTable.set(key1, "ahoi");
-hashTable.get(key0); // 33
-```
+### HashMap
 
-## SortedList
+- set(key: any, value: any): void
+- delete(key: any): boolean
+- pop(key: any): any
+- get(key: any): any
+- has(key: any): boolean
+- toString(): string
 
-- Gets sorted before lookup if an item has been added since the last sort
-- Much faster than array for many lookups but slower if it has to be re-sorted often
+### HashSet<T>
 
-```
-const list = new SortedList<string>();
-list.add("foo");
-list.add("bar");
-list.add("baz");
-list.includes("foobar"); // false
-list.indexOf("baz"); // 1
-```
+- add(token: T | Array<T>): Promise<boolean>
+- remove(token: T | T[]): Promise<boolean>
+- contains(token: T): Promise<boolean>
+- toggle(token: T): Promise<boolean>
+- forEach(callbackfn: (token: T, bucket: T[][]) => void): Promise<void>
 
-## sleep
+### Queue<T>
 
-- Returns a promise that will be fulfilled when the specified time has passed
+- enqueue(element: T): void
+- dequeue(): T | undefined
+- peek(): T | undefined
 
-```
-await sleep(500);
-```
+### SortedList<T>
+
+- add(value: T): void
+- remove(value: T): boolean
+- indexOf(value: T): number
+- includes(value: T): boolean
+
+### Stack<T>
+
+- push(item: T): void
+- pop(): T | undefined
+- peek(): T | undefined
+
+## Functions
+
+- delay(ms: number): Promise<void>
+
+- retriggerableDelay(delayId: string, ms: number, callback: Function): void
+
+- String.hash: () => number
+
+- httpGet(url: string, cached?: boolean): Promise<string>
