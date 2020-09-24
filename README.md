@@ -1,5 +1,7 @@
 # Rocket.ts
 
+TypeScript functions and classes for better performance
+
 ## Classes
 
 ### HashMap
