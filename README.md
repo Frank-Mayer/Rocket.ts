@@ -13,28 +13,28 @@ TypeScript functions and classes for better performance
 - has(key: any): boolean
 - toString(): string
 
-### HashSet<T>
+### HashSet\<T>
 
-- add(token: T | Array<T>): Promise<boolean>
-- remove(token: T | T[]): Promise<boolean>
-- contains(token: T): Promise<boolean>
-- toggle(token: T): Promise<boolean>
-- forEach(callbackfn: (token: T, bucket: T[][]) => void): Promise<void>
+- add(token: T | Array\<T>): Promise\<boolean>
+- remove(token: T | T[]): Promise\<boolean>
+- contains(token: T): Promise\<boolean>
+- toggle(token: T): Promise\<boolean>
+- forEach(callbackfn: (token: T, bucket: T[][]) => void): Promise\<void>
 
-### Queue<T>
+### Queue\<T>
 
 - enqueue(element: T): void
 - dequeue(): T | undefined
 - peek(): T | undefined
 
-### SortedList<T>
+### SortedList\<T>
 
 - add(value: T): void
 - remove(value: T): boolean
 - indexOf(value: T): number
 - includes(value: T): boolean
 
-### Stack<T>
+### Stack\<T>
 
 - push(item: T): void
 - pop(): T | undefined
@@ -42,10 +42,10 @@ TypeScript functions and classes for better performance
 
 ## Functions
 
-- delay(ms: number): Promise<void>
+- delay(ms: number): Promise\<void>
 
 - retriggerableDelay(delayId: string, ms: number, callback: Function): void
 
 - String.hash: () => number
 
-- httpGet(url: string, cached?: boolean): Promise<string>
+- httpGet(url: string, cached?: boolean): Promise\<string>
