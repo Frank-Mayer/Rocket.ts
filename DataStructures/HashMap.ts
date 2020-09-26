@@ -4,7 +4,9 @@ class HashMap {
   private limit: number;
 
   constructor(size: number = 256) {
-    if (size < 1) throw new Error("HashMap size must be greater than 0");
+    if (size < 1) {
+      throw new Error("HashMap size must be greater than 0");
+    }
     this.bucket = new Array<Array<Array<any>>>();
     this.length = 0;
     this.limit = size;
@@ -27,7 +29,7 @@ class HashMap {
         }
       }
       if (!inserted) {
-        console.debug("HashMap collision at Index " + index.toString());
+        // console.debug("HashMap collision at Index " + index.toString());
         this.bucket[index].push([key, value]);
         this.length++;
       }
@@ -39,7 +41,9 @@ class HashMap {
 
   delete(key: any): boolean {
     let index = this.hash(key);
-    if (this.bucket[index] === undefined) return false;
+    if (this.bucket[index] === undefined) {
+      return false;
+    }
     if (this.bucket[index].length === 1 && this.bucket[index][0][0] === key) {
       delete this.bucket[index];
       this.length--;
@@ -57,7 +61,9 @@ class HashMap {
 
   pop(key: any): any {
     let index = this.hash(key);
-    if (this.bucket[index] === undefined) return undefined;
+    if (this.bucket[index] === undefined) {
+      return undefined;
+    }
     if (this.bucket[index].length === 1 && this.bucket[index][0][0] === key) {
       const r = this.bucket[index][0][1];
       delete this.bucket[index];

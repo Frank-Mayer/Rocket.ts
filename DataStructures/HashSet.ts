@@ -21,7 +21,9 @@ class HashSet<T> {
       if (token instanceof Array) {
         let r = false;
         for await (const t of token) {
-          if (this.add(t)) r = true;
+          if (this.add(t)) {
+            r = true;
+          }
         }
         resolve(r);
         return;
@@ -36,7 +38,7 @@ class HashSet<T> {
           }
         }
         if (!inserted) {
-          console.debug("HashSet collision at Index " + index.toString());
+          // console.debug("HashSet collision at Index " + index.toString());
           this.bucket[index].push(token);
           this.length++;
           resolve(true);
@@ -57,7 +59,9 @@ class HashSet<T> {
       if (token instanceof Array) {
         let r = false;
         for await (const t of token) {
-          if (this.remove(t)) r = true;
+          if (this.remove(t)) {
+            r = true;
+          }
         }
         resolve(r);
         return;

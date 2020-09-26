@@ -1,4 +1,4 @@
-/// <reference path="../Classes/HashMap.ts"/>
+/// <reference path="../DataStructures/HashMap.ts"/>
 const httpGetCache = new HashMap(128);
 /**
  *Sends an asynchronous http-get request to a given url
