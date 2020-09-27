@@ -42,16 +42,16 @@ class SortedList<T> {
       this.list.push(value);
       this.hasChangedSinceLastSort = true;
     }
+    return this.length;
   }
 
-  remove(value: T): boolean {
+  remove(value: T): number {
     let i = this.indexOf(value);
     if (i >= 0) {
       this.list.splice(i, 1);
       this.length--;
-      return true;
     }
-    return false;
+    return this.length;
   }
 
   sort() {
