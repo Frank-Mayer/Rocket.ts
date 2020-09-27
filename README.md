@@ -5,6 +5,8 @@ TypeScript functions and classes for better performance
 ## Performance Test
 
  Compiled for: ES2018
+ 
+ Hardware: MacBook Pro 2019
 
  platform: darwin
 
