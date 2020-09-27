@@ -14,11 +14,11 @@ TypeScript functions and classes for better performance
 
 | Class | Function | 100 items | 1.000 items | 10.000 items | 100.000 items | 200.000 items
 |---|---|---|---|---|---|---
-SortedList | add | 0.15ms | 0.21ms | 4.38ms | 6.21ms | 9.57ms
-Array | push | 0.17ms | 0.16ms | 3.65ms | 8.31ms | 10.26ms
+SortedList | add | 0.17ms | 0.26ms | 5.00ms | 11.16ms | 12.20ms
+Array | push | 0.11ms | 0.13ms | 2.87ms | 6.97ms | 10.23ms
 | | | | | | | 
-SortedList | includes | 0.22ms | 1.70ms | 7.70ms | 54.79ms | 111.04ms
-Array | includes | 0.04ms | 0.74ms | 10.96ms | 117.84ms | 229.68ms
+SortedList | includes | 0.21ms | 1.69ms | 6.75ms | 46.80ms | 98.33ms
+Array | includes | 0.05ms | 0.76ms | 11.41ms | 107.37ms | 209.67ms
 | | | | | | | 
-SortedList | indexOf | 0.24ms | 1.78ms | 5.79ms | 56.37ms | 114.65ms
-Array | indexOf | 0.04ms | 0.77ms | 11.10ms | 108.37ms | 227.51ms
+SortedList | indexOf | 0.20ms | 1.68ms | 6.11ms | 54.77ms | 112.05ms
+Array | indexOf | 0.05ms | 0.75ms | 11.83ms | 109.77ms | 224.07ms

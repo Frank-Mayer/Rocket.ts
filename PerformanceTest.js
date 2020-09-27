@@ -58,7 +58,7 @@ function testList() {
     let x = new SortedList();
     let start = clock();
     randomLoop((r) => {
-      x.add(r);
+      consumer.consume(x.add(r));
     });
     md += " | " + clock(start).toString() + "ms";
   }
