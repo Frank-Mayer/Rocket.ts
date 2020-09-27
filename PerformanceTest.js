@@ -169,7 +169,7 @@ md += "\n\n Node.js: " + v.node;
 md += "\n\n V8: " + v.v8;
 md += "\n\n";
 
-let heavySet = [100, 1000, 10000, 100000, 200000];
+let heavySet = [100, 1000, 10000, 100000, 1000000];
 md += testList();
 
 fs.writeFile("README.md", md, (err) => {

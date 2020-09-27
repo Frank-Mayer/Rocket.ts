@@ -12,13 +12,13 @@ TypeScript functions and classes for better performance
 
  V8: 8.4.371.19-node.12
 
-| Class | Function | 100 items | 1.000 items | 10.000 items | 100.000 items | 200.000 items
+| Class | Function | 100 items | 1.000 items | 10.000 items | 100.000 items | 1.000.000 items
 |---|---|---|---|---|---|---
-SortedList | add | 0.17ms | 0.26ms | 5.00ms | 11.16ms | 12.20ms
-Array | push | 0.11ms | 0.13ms | 2.87ms | 6.97ms | 10.23ms
+SortedList | add | 0.16ms | 0.25ms | 4.84ms | 11.22ms | 57.25ms
+Array | push | 0.13ms | 0.15ms | 3.07ms | 6.67ms | 54.53ms
 | | | | | | | 
-SortedList | includes | 0.21ms | 1.69ms | 6.75ms | 46.80ms | 98.33ms
-Array | includes | 0.05ms | 0.76ms | 11.41ms | 107.37ms | 209.67ms
+SortedList | includes | 0.21ms | 1.64ms | 5.55ms | 52.53ms | 605.54ms
+Array | includes | 0.06ms | 0.78ms | 11.65ms | 113.79ms | 1110.47ms
 | | | | | | | 
-SortedList | indexOf | 0.20ms | 1.68ms | 6.11ms | 54.77ms | 112.05ms
-Array | indexOf | 0.05ms | 0.75ms | 11.83ms | 109.77ms | 224.07ms
+SortedList | indexOf | 0.20ms | 1.68ms | 4.75ms | 44.15ms | 475.84ms
+Array | indexOf | 0.05ms | 0.76ms | 11.82ms | 109.76ms | 1055.08ms
