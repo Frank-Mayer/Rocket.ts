@@ -160,10 +160,13 @@ function testList() {
   return md;
 }
 
+import os from "os";
+
 let md =
   "# Rocket.ts\n\nTypeScript functions and classes for better performance\n\n## Performance Test";
 md += "\n\n Compiled for: ES2018";
-md += "\n\n platform: " + process.platform.toString();
+md += "\n\n Platform: " + process.platform.toString();
+md += "\n\n Hardware: " + os.cpus()[0].model;
 let v = process.versions;
 md += "\n\n Node.js: " + v.node;
 md += "\n\n V8: " + v.v8;
