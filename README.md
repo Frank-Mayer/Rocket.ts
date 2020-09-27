@@ -4,23 +4,23 @@ TypeScript functions and classes for better performance
 
 ## Performance Test
 
- Compiled for: ES2018
+Compiled for: ES2018
 
- Platform: darwin
+Platform: win32
 
- Hardware: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Hardware: AMD Ryzen 7 3700X Eight-Core Processor 4.4GHz
 
- Node.js: 14.8.0
+Node.js: 14.10.0
 
- V8: 8.4.371.19-node.12
+V8: 8.4.371.19-node.16
 
-| Class | Function | 100 items | 1.000 items | 10.000 items | 100.000 items | 1.000.000 items
-|---|---|---|---|---|---|---
-SortedList | add | 0.16ms | 0.25ms | 5.13ms | 10.89ms | 56.61ms
-Array | push | 0.12ms | 0.15ms | 3.08ms | 7.27ms | 55.53ms
-| | | | | | | 
-SortedList | includes | 0.28ms | 1.65ms | 6.65ms | 44.69ms | 498.72ms
-Array | includes | 0.05ms | 0.74ms | 11.67ms | 105.32ms | 1069.92ms
-| | | | | | | 
-SortedList | indexOf | 0.20ms | 1.72ms | 5.55ms | 52.71ms | 576.83ms
-Array | indexOf | 0.05ms | 0.74ms | 11.12ms | 103.85ms | 1091.95ms
+| Class      | Function | 100 items | 1.000 items | 10.000 items | 100.000 items | 1.000.000 items |
+| ---------- | -------- | --------- | ----------- | ------------ | ------------- | --------------- |
+| SortedList | add      | 0.16ms    | 0.25ms      | 4.94ms       | 10.25ms       | 46.80ms         |
+| Array      | push     | 0.16ms    | 0.17ms      | 3.44ms       | 7.27ms        | 55.53ms         |
+|            |          |           |             |              |               |
+| SortedList | includes | 0.26ms    | 1.65ms      | 6.22ms       | 44.69ms       | 498.72ms        |
+| Array      | includes | 0.05ms    | 0.74ms      | 11.67ms      | 105.32ms      | 1069.92ms       |
+|            |          |           |             |              |               |
+| SortedList | indexOf  | 0.20ms    | 1.72ms      | 5.33ms       | 47.75ms       | 501.86ms        |
+| Array      | indexOf  | 0.05ms    | 0.74ms      | 11.12ms      | 103.85ms      | 1091.95ms       |
