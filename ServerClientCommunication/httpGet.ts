@@ -1,5 +1,5 @@
 /// <reference path="../DataStructures/HashMap.ts"/>
-const httpGetCache = new HashMap(128);
+const httpGetCache = new HashMap();
 /**
  *Sends an asynchronous http-get request to a given url
  * @param url Url to send the request to
