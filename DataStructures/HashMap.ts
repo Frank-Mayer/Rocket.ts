@@ -1,20 +1,14 @@
 class HashMap {
   private bucket: any[][][];
   public length: number;
-  private limit: number;
 
-  constructor(size: number = 256) {
-    if (size < 1) {
-      throw new Error("HashMap size must be greater than 0");
-    }
+  constructor() {
     this.bucket = new Array<Array<Array<any>>>();
     this.length = 0;
-    this.limit = size;
   }
 
   private hash(value: any): number {
-    let hash = JSON.stringify(value).hash();
-    return hash % this.limit;
+    return JSON.stringify(value).hash();
   }
 
   set(key: any, value: any) {
@@ -116,5 +110,13 @@ class HashMap {
     }
     r += "}";
     return r;
+  }
+
+  forEach(callback: (el: any, map: any[][][]) => void) {
+    for (const bucket of this.bucket) {
+      for (const el of bucket) {
+        callback(el, this.bucket);
+      }
+    }
   }
 }

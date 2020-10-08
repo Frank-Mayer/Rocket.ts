@@ -1,16 +1,16 @@
 class HashSet<T> {
   private bucket: T[][];
   public length: number;
-  private limit: number;
-  constructor(size: number = 256) {
+  // private limit: number;
+  constructor() {
     this.bucket = new Array<Array<T>>();
     this.length = 0;
-    this.limit = size;
+    // this.limit = size;
   }
 
   private hash(value: T): number {
-    let hash = JSON.stringify(value).hash();
-    return hash % this.limit;
+    return JSON.stringify(value).hash();
+    // return hash % this.limit;
   }
 
   /**
