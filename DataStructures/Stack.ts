@@ -22,7 +22,7 @@ class Stack<T> {
     }
   }
 
-  peek(): T | undefined {
-    return this.storage[this.length - 1];
+  peek(pos: number = 1): T | undefined {
+    return this.storage[this.length - pos];
   }
 }

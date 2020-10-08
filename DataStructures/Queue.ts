@@ -22,7 +22,7 @@ class Queue<T> {
     }
   }
 
-  peek(): T | undefined {
-    return this.storage[0];
+  peek(pos: number = 1): T | undefined {
+    return this.storage[pos - 1];
   }
 }
