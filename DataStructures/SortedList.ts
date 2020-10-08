@@ -45,13 +45,14 @@ class SortedList<T> {
     return this.length;
   }
 
-  remove(value: T): number {
+  remove(value: T): boolean {
     let i = this.indexOf(value);
     if (i >= 0) {
       this.list.splice(i, 1);
       this.length--;
+      return true;
     }
-    return this.length;
+    return false;
   }
 
   sort() {
