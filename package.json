@@ -1,3 +1,31 @@
 {
-  "type": "module"
+  "type": "module",
+  "name": "rocket.ts",
+  "homepage": "https://github.com/Frank-Mayer/Rocket.ts",
+  "keywords": [
+    "typescript",
+    "performance",
+    "hashmap",
+    "hashtable",
+    "sorted",
+    "list"
+  ],
+  "bugs": {
+    "url": "https://github.com/Frank-Mayer/Rocket.ts/issues"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "description": "TypeScript functions and classes for better performance",
+  "author": "Frank Mayer (https://frank-mayer.tk)",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "version": "1.0.0",
+  "main": "out/rocket.js",
+  "scripts": {
+    "test": "node UnitTest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frank-Mayer/Rocket.ts.git"
+  }
 }
