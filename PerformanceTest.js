@@ -1,4 +1,10 @@
 "use strict";
+
+import {
+  rocket_SortedList as SortedList,
+  rocket_HashMap as HashMap,
+  // rocket_HashSet as HashSet,
+} from "./out/rocket.js";
 import fs from "fs";
 
 const consumer = {
@@ -12,11 +18,6 @@ const nf = Intl.NumberFormat();
 let heavy = 0;
 let maxRandom = 1000;
 const test = new Map();
-
-import {
-  rocket_SortedList as SortedList,
-  // rocket_HashSet as HashSet,
-} from "./out/rocket.js";
 
 function clock(start) {
   if (start) {
@@ -88,6 +89,19 @@ function testList() {
   md += "\nSortedList | includes";
   for (heavy of heavySet) {
     let x = new SortedList();
+    randomLoop((r) => {
+      x.add(r);
+    });
+    let start = clock();
+    randomLoop((r) => {
+      consumer.consume(x.includes(r));
+    });
+    md += " | " + clock(start).toString() + "ms";
+  }
+
+  md += "\nHashMap | includes";
+  for (heavy of heavySet) {
+    let x = new HashMap();
     randomLoop((r) => {
       x.add(r);
     });
