@@ -35,7 +35,7 @@ export += "};"
 
 txt += export
 
-# txt = re.sub(r"//.*", "", txt)
+txt = re.sub(r"//.*", "", txt)
 # txt = txt.replace(", ", ",").replace(
 #     ") ", ")").replace(" (", "(").replace(" {", "{")
 # txt = re.sub(r";\n\s*", ";", txt)

@@ -35,7 +35,7 @@ String.prototype.compress = function (): string {
   //translate binary bytes into a string
   let finalStr = new StringBuilder();
   for (const b of bytes) {
-    let n = parseInt(b, 2) + 33;
+    let n = parseInt(b, 2) + 32;
     finalStr.append(String.fromCharCode(n));
   }
   return finalStr.toString();
@@ -48,7 +48,7 @@ String.prototype.decompress = function (): string {
   let bytes = new StringBuilder();
   for (const char of this.split("")) {
     bytes.append(
-      ((char.charCodeAt(0) - 33) >>> 0).toString(2).padStart(8, "0")
+      ((char.charCodeAt(0) - 32) >>> 0).toString(2).padStart(8, "0")
     );
   }
   let str = bytes.toString();
