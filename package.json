@@ -1,5 +1,6 @@
 {
   "name": "rocket-ts",
+  "type": "module",
   "version": "1.0.0",
   "description": "TypeScript functions and classes for better performance",
   "main": "out/rocket.js",
