@@ -1,7 +1,9 @@
-String.prototype.compress = function (): string {
+String.prototype.encode = function (): string {
+  let b64 = Buffer.from(this.toString(), "utf8").toString("base64");
   let huffmanCharArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".split(
     ""
   );
+
   let huffman = (char: string): string => {
     let i = huffmanCharArr.indexOf(char);
     if (i < 0) {
@@ -15,7 +17,7 @@ String.prototype.compress = function (): string {
   };
   // Every char of string as huffman binary
   let compressedString = new StringBuilder();
-  for (const char of this.split("")) {
+  for (const char of b64.split("")) {
     compressedString.append(huffman(char));
   }
   // concat sb and cut into bytes
@@ -41,7 +43,7 @@ String.prototype.compress = function (): string {
   return finalStr.toString();
 };
 
-String.prototype.decompress = function (): string {
+String.prototype.decode = function (): string {
   let huffmanCharArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".split(
     ""
   );
@@ -69,10 +71,10 @@ String.prototype.decompress = function (): string {
   for (const huffmanByte of huffmanBytes) {
     finalString.append(huffmanCharArr[parseInt(huffmanByte, 2)]);
   }
-  return finalString.toString();
+  return Buffer.from(finalString.toString(), "base64").toString("utf-8");
 };
 
 interface String {
-  compress: () => string;
-  decompress: () => string;
+  encode: () => string;
+  decode: () => string;
 }
