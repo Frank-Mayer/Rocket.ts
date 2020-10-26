@@ -27,6 +27,13 @@ class StringBuilder {
     }
   }
 
+  appendWithLinebreak(value: string) {
+    if (value) {
+      this.bucket.push(value + "\n");
+      this.length += value.length + 1;
+    }
+  }
+
   clear() {
     this.length = 0;
   }
