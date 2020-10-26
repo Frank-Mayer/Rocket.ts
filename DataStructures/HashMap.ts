@@ -1,10 +1,12 @@
 class HashMap {
   private bucket: any[][][];
   public length: number;
+  private hashList: SortedList<number>;
 
   constructor() {
     this.bucket = new Array<Array<Array<any>>>();
     this.length = 0;
+    this.hashList = new SortedList<number>();
   }
 
   private hash(value: any): number {
@@ -13,6 +15,9 @@ class HashMap {
 
   set(key: any, value: any) {
     let index = this.hash(key);
+    if (!this.hashList.includes(index)) {
+      this.hashList.add(index);
+    }
     if (this.bucket[index]) {
       let inserted = false;
       for (let i = 0; i < this.bucket[index].length; i++) {
@@ -112,10 +117,15 @@ class HashMap {
     return r;
   }
 
-  forEach(callback: (el: any, map: any[][][]) => void) {
-    for (const bucket of this.bucket) {
-      for (const el of bucket) {
-        callback(el, this.bucket);
+  forEach(callback: (el: any[2], map: any[][][]) => void) {
+    if (this.bucket) {
+      for (const bucketIndex of this.hashList) {
+        let bucket = this.bucket[bucketIndex];
+        if (bucket) {
+          for (const el of bucket) {
+            callback(el, this.bucket);
+          }
+        }
       }
     }
   }
