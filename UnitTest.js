@@ -43,6 +43,9 @@ test(hashMap.get("meep"), "12345");
 test(hashMap.length, 3);
 test(hashMap.pop(33), 4204);
 test(hashMap.length, 2);
+hashMap.forEach((el) => {
+  console.log(el);
+});
 
 const sortedList = new rocket_SortedList();
 sortedList.add("tux");
@@ -76,16 +79,15 @@ test(queue.dequeue(), "cat");
 test(queue.dequeue(), "bird");
 
 const hashSet = new rocket_HashSet();
-hashSet.contains("meep").then((v) => test(v, false));
-hashSet.toggle("meep").then((v) => test(v, true));
-hashSet.toggle("meep").then((v) => test(v, false));
-hashSet.toggle("meep").then((v) => test(v, true));
-hashSet.add("i like turtles").then((v) => test(v, true));
-hashSet.remove("meep").then((v) => test(v, true));
-const hashSetB = new rocket_HashSet();
-hashSetB.add("ahoi").then((v) => test(v, true));
-
-let testText =
-  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. \nDuis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.\nUt wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore";
-let enc = testText.encode();
-test(enc.decode(), testText);
+test(hashSet.contains("meep"), false);
+hashSet.toggle("meep");
+test(hashSet.contains("meep"), true);
+hashSet.add("i like turtles");
+hashSet.add("i like turtles");
+hashSet.add("i like turtles");
+hashSet.add("i like turtles");
+test(hashSet.contains("i like turtles"), true);
+console.log(hashSet.bucket);
+hashSet.forEach((v) => {
+  console.log(v);
+});
