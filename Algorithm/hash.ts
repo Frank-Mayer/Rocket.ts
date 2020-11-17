@@ -11,7 +11,7 @@ String.prototype.hash = function () {
     hash |= 0; // Convert to 32bit integer
     hash += 2147483648;
   }
-  return hash;
+  return hash % Number.MAX_SAFE_INTEGER;
 };
 
 interface String {
