@@ -4,7 +4,7 @@ import {
   rocket_SortedList,
   rocket_Stack,
   rocket_Queue,
-  rocket_HashSet,
+  rocket_doOnce,
 } from "./out/rocket.js";
 
 let failed = 0;
@@ -43,9 +43,6 @@ test(hashMap.get("meep"), "12345");
 test(hashMap.length, 3);
 test(hashMap.pop(33), 4204);
 test(hashMap.length, 2);
-hashMap.forEach((el) => {
-  console.log(el);
-});
 
 const sortedList = new rocket_SortedList();
 sortedList.add("tux");
@@ -78,16 +75,18 @@ test(queue.dequeue(), "dog");
 test(queue.dequeue(), "cat");
 test(queue.dequeue(), "bird");
 
-const hashSet = new rocket_HashSet();
-test(hashSet.contains("meep"), false);
-hashSet.toggle("meep");
-test(hashSet.contains("meep"), true);
-hashSet.add("i like turtles");
-hashSet.add("i like turtles");
-hashSet.add("i like turtles");
-hashSet.add("i like turtles");
-test(hashSet.contains("i like turtles"), true);
-console.log(hashSet.bucket);
-hashSet.forEach((v) => {
-  console.log(v);
-});
+// let m = new rocket_HashMap();
+// m.set("50", "uefiefeuinfenfie");
+// m.set(2424, "uefienfie");
+// let ptr = rocket_Pointer.reference(m);
+// test(ptr.dereference().get(2424), m.get(2424));
+// let ptr2 = new rocket_Pointer(ptr.address);
+// test(ptr2.dereference().get(2424), m.get(2424));
+
+let shouldExec = true;
+for (let i = 0; i < 3; i++) {
+  rocket_doOnce(() => {
+    test(true, shouldExec);
+  });
+  shouldExec = false;
+}

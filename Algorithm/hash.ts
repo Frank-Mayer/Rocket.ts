@@ -1,17 +1,15 @@
-String.prototype.hash = function () {
-  let hash = 0,
-    i,
-    chr;
+String.prototype.hash = function (): number {
+  let hash = BigInt(0);
+  let index = 0;
+  let char = BigInt(0);
   if (this.length === 0) {
-    return hash;
+    return 0;
   }
-  for (i = 0; i < this.length; i++) {
-    chr = this.charCodeAt(i);
-    hash = (hash << 5) - hash + chr;
-    hash |= 0; // Convert to 32bit integer
-    hash += 2147483648;
+  for (index = 0; index < this.length; index++) {
+    char = BigInt(this.charCodeAt(index));
+    hash += char;
   }
-  return hash % Number.MAX_SAFE_INTEGER;
+  return Number(hash % BigInt(Number.MAX_SAFE_INTEGER));
 };
 
 interface String {

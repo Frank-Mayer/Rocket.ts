@@ -1,6 +1,6 @@
-import sys
 import os
 import re
+from pathlib import Path
 
 os.system("tsc -p ./tsconfig.json --pretty")
 
@@ -54,8 +54,23 @@ file_object = open(dfile, "r")
 txt = file_object.read()
 file_object.close()
 
-txt = 'declare module "'+moduleName+'" {\n'+txt.replace("declare ", "")+"\n"+export+"\n}"
+txt = 'declare module "'+moduleName + \
+    '" {\n'+txt.replace("declare ", "")+"\n"+export+"\n}"
 
 file_object = open(dfile, "w")
 file_object.write(txt)
 file_object.close()
+
+ref = open("./out/reference.ts", "w+")
+ref.write("")
+ref.close()
+ref = open("./out/reference.ts", "a")
+dts = list(Path(".").rglob("*.d.ts"))
+for file in dts:
+    if "out/" not in str(file):
+        ref.write("/// <reference path=\""+str(file)+"\" />\n")
+ts = list(Path(".").rglob("*.ts"))
+for file in ts:
+    if "out/" not in str(file):
+        ref.write("/// <reference path=\"../"+str(file)+"\" />\n")
+ref.close()

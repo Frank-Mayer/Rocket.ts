@@ -28,7 +28,6 @@ class HashMap {
         }
       }
       if (!inserted) {
-        // console.debug("HashMap collision at Index " + index.toString());
         this.bucket[index].push([key, value]);
         this.length++;
       }
