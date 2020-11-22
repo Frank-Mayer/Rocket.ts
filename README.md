@@ -1,6 +1,20 @@
 # Rocket.ts
 
-TypeScript functions and classes for better performance
+TypeScript functions and classes for better performance and easier programming
+
+* String.hash
+* HashMap
+* Queue
+* SortedList
+* Stack
+* StringBuilder
+* doOnce
+* IndexedDB Helper Functions
+* async httpGet, with optional cache (Promise based)
+* delay
+* retriggerableDelay
+
+in use here: [CMapper](https://cmapper.web.app)
 
 ## Performance Test
 
