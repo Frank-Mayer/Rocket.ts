@@ -14,6 +14,8 @@ TypeScript functions and classes for better performance and easier programming
 * delay
 * retriggerableDelay
 
+in use here: [CMapper](https://cmapper.web.app)
+
 ## Performance Test
 
 Compiled for: ES2018
