@@ -1,3 +1,6 @@
+/**
+ * Represents a mutable string of characters
+ */
 class StringBuilder {
   private bucket: Array<string>;
   public length: number;
@@ -16,30 +19,41 @@ class StringBuilder {
     return this.toString().split("");
   }
 
-  toString() {
+  public toString() {
     return this.bucket.join("");
   }
 
-  append(value: string) {
+  public append(value: string) {
     if (value) {
       this.bucket.push(value);
       this.length += value.length;
     }
   }
 
-  appendWithLinebreak(value: string) {
+  public appendLine(value: string) {
     if (value) {
       this.bucket.push(value + "\n");
       this.length += value.length + 1;
     }
   }
 
-  clear() {
+  public clear() {
     this.length = 0;
+    this.bucket = new Array<string>();
   }
 
-  replace(searchValue: string | RegExp, replaceValue: string) {
+  public replace(searchValue: string | RegExp, replaceValue: string): void {
     this.bucket = [this.toString().replace(searchValue, replaceValue)];
+    this.countLength();
+  }
+
+  public replaceAll(searchValue: string | RegExp, replaceValue: string): void {
+    if (typeof searchValue === "string") {
+      const r = new RegExp(searchValue, "g");
+      this.bucket = [this.toString().replace(r, replaceValue)];
+    } else if (searchValue instanceof RegExp) {
+      this.bucket = [this.toString().replace(searchValue, replaceValue)];
+    }
     this.countLength();
   }
 

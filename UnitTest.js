@@ -4,6 +4,7 @@ import {
   rocket_SortedList,
   rocket_Stack,
   rocket_Queue,
+  rocket_Pointer,
   rocket_doOnce,
 } from "./out/rocket.js";
 

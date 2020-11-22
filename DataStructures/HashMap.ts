@@ -1,3 +1,6 @@
+/**
+ * Represents a collection of key/value pairs that are organized based on the hash code of the key
+ */
 class HashMap {
   private bucket: any[][][];
   public length: number;
@@ -13,7 +16,7 @@ class HashMap {
     return JSON.stringify(value).hash();
   }
 
-  set(key: any, value: any) {
+  public set(key: any, value: any): void {
     let index = this.hash(key);
     if (!this.hashList.includes(index)) {
       this.hashList.add(index);
@@ -37,7 +40,7 @@ class HashMap {
     }
   }
 
-  delete(key: any): boolean {
+  public delete(key: any): boolean {
     let index = this.hash(key);
     if (this.bucket[index] === undefined) {
       return false;
@@ -57,7 +60,7 @@ class HashMap {
     return false;
   }
 
-  pop(key: any): any {
+  public pop(key: any): any {
     let index = this.hash(key);
     if (this.bucket[index] === undefined) {
       return undefined;
@@ -79,7 +82,7 @@ class HashMap {
     return undefined;
   }
 
-  get(key: any) {
+  public get(key: any): any {
     let index = this.hash(key);
     if (this.bucket[index]) {
       for (let i = 0; i < this.bucket[index].length; i++) {
@@ -91,7 +94,7 @@ class HashMap {
     return undefined;
   }
 
-  has(key: any): boolean {
+  public has(key: any): boolean {
     let index = this.hash(key);
     if (this.bucket[index]) {
       for (let i = 0; i < this.bucket[index].length; i++) {
@@ -103,7 +106,7 @@ class HashMap {
     return false;
   }
 
-  toString(): string {
+  public toString(): string {
     let r = "{\n";
     for (const b of this.bucket) {
       if (b) {
@@ -116,7 +119,7 @@ class HashMap {
     return r;
   }
 
-  forEach(callback: (el: any[2], map: any[][][]) => void) {
+  public forEach(callback: (el: any[2], map: any[][][]) => void): void {
     if (this.bucket) {
       for (const bucketIndex of this.hashList) {
         let bucket = this.bucket[bucketIndex];

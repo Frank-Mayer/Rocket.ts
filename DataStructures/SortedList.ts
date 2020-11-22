@@ -1,3 +1,6 @@
+/**
+ * The SortedList is a self sorting typed Array of objects that can be accessed by index
+ */
 class SortedList<T> {
   private list: Array<T>;
   private hasChangedSinceLastSort: boolean;
@@ -17,12 +20,12 @@ class SortedList<T> {
     return this.list.values();
   }
 
-  add(value: T, insertSorted: boolean = false) {
+  public add(value: T, insertSorted: boolean = false): number {
     this.length++;
     if (insertSorted) {
       if (this.length === 1) {
         this.list = [value];
-        return;
+        return this.length;
       }
       this.sort();
       let firstIndex = 0;
@@ -45,7 +48,7 @@ class SortedList<T> {
     return this.length;
   }
 
-  remove(value: T): boolean {
+  public remove(value: T): boolean {
     let i = this.indexOf(value);
     if (i >= 0) {
       this.list.splice(i, 1);
@@ -55,14 +58,14 @@ class SortedList<T> {
     return false;
   }
 
-  sort() {
+  public sort(): void {
     if (this.hasChangedSinceLastSort && this.length > 1) {
       this.list.sort();
       this.hasChangedSinceLastSort = false;
     }
   }
 
-  indexOf(value: T): number {
+  public indexOf(value: T): number {
     if (this.length === 0) {
       return -1;
     }
@@ -82,7 +85,7 @@ class SortedList<T> {
     return this.list[middleIndex] !== value ? -1 : middleIndex;
   }
 
-  includes(value: T): boolean {
+  public includes(value: T): boolean {
     if (this.length === 0) {
       return false;
     }

@@ -1,3 +1,6 @@
+/**
+ * Represents a first-in, first-out collection of objects
+ */
 class Queue<T> {
   private storage: Array<T>;
   public length: number;
@@ -7,12 +10,16 @@ class Queue<T> {
     this.length = 0;
   }
 
-  enqueue(element: T) {
+  [Symbol.iterator]() {
+    return this.storage;
+  }
+
+  public enqueue(element: T): void {
     this.storage.push(element);
     this.length++;
   }
 
-  dequeue(): T | undefined {
+  public dequeue(): T | undefined {
     let removed = this.storage.shift();
     if (removed) {
       this.length--;
@@ -22,7 +29,7 @@ class Queue<T> {
     }
   }
 
-  peek(pos: number = 1): T | undefined {
+  public peek(pos: number = 1): T | undefined {
     return this.storage[pos - 1];
   }
 }

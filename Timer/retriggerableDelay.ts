@@ -1,7 +1,11 @@
-const retriggerableDelayCache = new Map<string, number>();
-function retriggerableDelay(delayId: string, ms: number, callback: Function) {
-  if (retriggerableDelayCache.has(delayId)) {
-    clearTimeout(retriggerableDelayCache.get(delayId));
+const __retriggerableDelayCache = new Map<string, number>();
+function retriggerableDelay(
+  delayId: string,
+  ms: number,
+  callback: Function
+): void {
+  if (__retriggerableDelayCache.has(delayId)) {
+    clearTimeout(__retriggerableDelayCache.get(delayId));
   }
-  retriggerableDelayCache.set(delayId, window.setTimeout(callback, ms));
+  __retriggerableDelayCache.set(delayId, window.setTimeout(callback, ms));
 }

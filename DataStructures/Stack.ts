@@ -1,3 +1,6 @@
+/**
+ * Represents a last-in-first-out (LIFO) collection of instances of the same specified type
+ */
 class Stack<T> {
   private storage: Array<T>;
   public length: number;
@@ -6,12 +9,12 @@ class Stack<T> {
     this.length = 0;
   }
 
-  push(item: T) {
+  public push(item: T): void {
     this.storage.push(item);
     this.length++;
   }
 
-  pop(): T | undefined {
+  public pop(): T | undefined {
     let removed = this.storage.pop();
     if (removed) {
       delete this.storage[this.length];
@@ -22,7 +25,7 @@ class Stack<T> {
     }
   }
 
-  peek(pos: number = 1): T | undefined {
+  public peek(pos: number = 1): T | undefined {
     return this.storage[this.length - pos];
   }
 }

@@ -1,5 +1,5 @@
 /// <reference path="../DataStructures/HashMap.ts"/>
-const httpGetCache = new HashMap();
+const __httpGetCache = new HashMap();
 /**
  *Sends an asynchronous http-get request to a given url
  * @param url Url to send the request to
@@ -10,8 +10,8 @@ async function httpGet(url: string, cached: boolean = false) {
     resolve: (value: string) => void,
     reject: (reason?: any) => void
   ) {
-    if (cached && httpGetCache.has(url)) {
-      let cache = httpGetCache.get(url);
+    if (cached && __httpGetCache.has(url)) {
+      let cache = __httpGetCache.get(url);
       if (cache[0]) {
         resolve(cache[1]);
       } else {
@@ -23,12 +23,12 @@ async function httpGet(url: string, cached: boolean = false) {
       if (xmlHttp.readyState == 4) {
         if (xmlHttp.status == 200) {
           if (cached) {
-            httpGetCache.set(url, [true, xmlHttp.responseText]);
+            __httpGetCache.set(url, [true, xmlHttp.responseText]);
           }
           resolve(xmlHttp.responseText);
         } else {
           if (cached) {
-            httpGetCache.set(url, [false, xmlHttp.response]);
+            __httpGetCache.set(url, [false, xmlHttp.response]);
           }
           reject(xmlHttp.response);
         }
