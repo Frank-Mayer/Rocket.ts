@@ -83,6 +83,17 @@ class LinkedList<T> {
     return -1;
   }
 
+  public search(value: T): LinkedListNode<T> | null {
+    let currentNode = this.head;
+    for (let index = 0; currentNode; index++) {
+      if (currentNode.value === value) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
+  }
+
   public forEach(
     callback: (
       value: T,
