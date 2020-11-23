@@ -5,7 +5,7 @@ class LinkedList<T> {
   protected head: LinkedListNode<T> | null;
   protected tail: LinkedListNode<T> | null;
 
-  constructor(content: Array<T> | null) {
+  constructor(content: Array<T> | null = null) {
     this.head = this.tail = null;
     if (content) {
       for (const value of content) {
@@ -72,6 +72,20 @@ class LinkedList<T> {
     }
   }
 
+  public clear(clean?: boolean): void {
+    if (this.head) {
+      if (clean) {
+        let currentNode = this.tail;
+        while (currentNode) {
+          currentNode.next = null;
+          currentNode = currentNode.previous;
+        }
+      } else {
+        this.tail = this.head = null;
+      }
+    }
+  }
+
   public indexOf(value: T): number {
     let currentNode = this.head;
     for (let index = 0; currentNode; index++) {
@@ -81,6 +95,10 @@ class LinkedList<T> {
       currentNode = currentNode.next;
     }
     return -1;
+  }
+
+  public includes(value: T): boolean {
+    return this.indexOf(value) >= 0;
   }
 
   public search(value: T): LinkedListNode<T> | null {
@@ -94,16 +112,21 @@ class LinkedList<T> {
     return null;
   }
 
+  public isEmpty(): boolean {
+    return !this.head;
+  }
+
   public forEach(
     callback: (
       value: T,
       prev: LinkedListNode<T> | null,
-      next: LinkedListNode<T> | null
+      next: LinkedListNode<T> | null,
+      index: number
     ) => void
   ): void {
     let currentNode = this.head;
-    while (currentNode) {
-      callback(currentNode.value, currentNode.previous, currentNode.next);
+    for (let i = 0; currentNode; i++) {
+      callback(currentNode.value, currentNode.previous, currentNode.next, i);
       currentNode = currentNode.next;
     }
   }
