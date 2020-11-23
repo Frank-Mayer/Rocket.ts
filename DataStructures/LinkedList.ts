@@ -2,8 +2,8 @@
  * Represents a doubly linked list
  */
 class LinkedList<T> {
-  head: LinkedListNode<T> | null;
-  tail: LinkedListNode<T> | null;
+  protected head: LinkedListNode<T> | null;
+  protected tail: LinkedListNode<T> | null;
 
   constructor(content: Array<T> | null) {
     this.head = this.tail = null;
@@ -72,7 +72,7 @@ class LinkedList<T> {
     }
   }
 
-  public search(value: T): number {
+  public indexOf(value: T): number {
     let currentNode = this.head;
     for (let index = 0; currentNode; index++) {
       if (currentNode.value === value) {
