@@ -4,6 +4,7 @@
 class LinkedList<T> {
   protected head: LinkedListNode<T> | null;
   protected tail: LinkedListNode<T> | null;
+  public length: number;
 
   constructor(content: Array<T> | null = null) {
     this.head = this.tail = null;
@@ -11,7 +12,14 @@ class LinkedList<T> {
       for (const value of content) {
         this.append(value);
       }
+      this.length = content.length;
+    } else {
+      this.length = 0;
     }
+  }
+
+  static of<T>(value: T): LinkedList<T> {
+    return new LinkedList<T>([value]);
   }
 
   [Symbol.iterator]() {
@@ -27,6 +35,7 @@ class LinkedList<T> {
       oldTail.next = this.tail;
       this.tail.previous = oldTail;
     }
+    this.length++;
   }
 
   public prepend(value: T): void {
@@ -38,9 +47,11 @@ class LinkedList<T> {
       oldHead.previous = this.head;
       this.head.next = oldHead;
     }
+    this.length++;
   }
 
   public deleteHead(): T | null {
+    this.length--;
     if (!this.head) {
       return null;
     } else {
@@ -57,6 +68,7 @@ class LinkedList<T> {
   }
 
   public deleteTail(): T | null {
+    this.length--;
     if (!this.tail) {
       return null;
     } else {
@@ -72,6 +84,39 @@ class LinkedList<T> {
     }
   }
 
+  public splice(start: number, deleteCount: number = 1): boolean {
+    if (start < 0 || (deleteCount && deleteCount < 1)) {
+      return false;
+    }
+    let deletedNode: LinkedListNode<T> | null = null;
+    let newConnect: LinkedListNode<T> | null = null;
+    let currentNode = this.head;
+    let index = start;
+    for (let i = 0; currentNode; i++) {
+      if (i === index) {
+        if (deletedNode) {
+          newConnect = currentNode;
+          break;
+        } else {
+          deletedNode = currentNode;
+        }
+        index += deleteCount;
+      }
+      currentNode = currentNode.next;
+    }
+    if (deletedNode && newConnect) {
+      if (deletedNode.previous) {
+        deletedNode.previous.next = newConnect;
+        newConnect.previous = deletedNode.previous;
+        return true;
+      } else if (deletedNode === this.head) {
+        this.head = newConnect;
+        return true;
+      }
+    }
+    return false;
+  }
+
   public clear(clean?: boolean): void {
     if (this.head) {
       if (clean) {
@@ -84,6 +129,7 @@ class LinkedList<T> {
         this.tail = this.head = null;
       }
     }
+    this.length = 0;
   }
 
   public indexOf(value: T): number {
@@ -95,6 +141,19 @@ class LinkedList<T> {
       currentNode = currentNode.next;
     }
     return -1;
+  }
+
+  public at(index: number): T | null {
+    let currentNode = this.head;
+    for (let i = 0; currentNode; i++) {
+      if (i === index) {
+        return currentNode.value;
+      } else if (i > index) {
+        return null;
+      }
+      currentNode = currentNode.next;
+    }
+    return null;
   }
 
   public includes(value: T): boolean {
@@ -137,6 +196,10 @@ class LinkedList<T> {
       r.push(v);
     });
     return r;
+  }
+
+  public toString(): string {
+    return this.toArray().toString();
   }
 }
 

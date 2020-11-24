@@ -18,7 +18,7 @@ for val in classes:
         export += ", "
     classname = val.replace("class ", "").replace(" {", "")
     print(classname)
-    export += classname + " as rocket_"+classname
+    export += classname
     comma = True
 
 functions = re.findall(r"function\s.+\(.*\)\s*", txt)
@@ -28,7 +28,7 @@ for val in functions:
     functionname = re.sub(r"\s*\(.*\)\s*{?", "", val)
     functionname = re.sub(r"(async)?function\s+", "", functionname)
     print(functionname)
-    export += functionname + " as rocket_"+functionname
+    export += functionname
     comma = True
 
 export += "};"
