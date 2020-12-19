@@ -1,3 +1,9 @@
+declare type LinkedListNode<T> = [
+  LinkedListNode<T> | null,
+  T,
+  LinkedListNode<T> | null
+];
+
 /**
  * Represents a doubly linked list
  */
@@ -18,6 +24,14 @@ class LinkedList<T> {
     }
   }
 
+  private LinkedListNode(
+    value: T,
+    prev: LinkedListNode<T> | null = null,
+    next: LinkedListNode<T> | null = null
+  ): LinkedListNode<T> {
+    return [prev, value, next];
+  }
+
   static of<T>(value: T): LinkedList<T> {
     return new LinkedList<T>([value]);
   }
@@ -28,24 +42,24 @@ class LinkedList<T> {
 
   public append(value: T): void {
     if (!this.tail) {
-      this.head = this.tail = new LinkedListNode(value);
+      this.head = this.tail = this.LinkedListNode(value);
     } else {
       const oldTail = this.tail;
-      this.tail = new LinkedListNode(value);
-      oldTail.next = this.tail;
-      this.tail.previous = oldTail;
+      this.tail = this.LinkedListNode(value);
+      oldTail[2] = this.tail;
+      this.tail[0] = oldTail;
     }
     this.length++;
   }
 
   public prepend(value: T): void {
     if (!this.head) {
-      this.head = this.tail = new LinkedListNode(value);
+      this.head = this.tail = this.LinkedListNode(value);
     } else {
       const oldHead = this.head;
-      this.head = new LinkedListNode(value);
-      oldHead.previous = this.head;
-      this.head.next = oldHead;
+      this.head = this.LinkedListNode(value);
+      oldHead[0] = this.head;
+      this.head[2] = oldHead;
     }
     this.length++;
   }
@@ -60,10 +74,10 @@ class LinkedList<T> {
       if (this.head === this.tail) {
         this.head = this.tail = null;
       } else {
-        this.head = this.head.next;
-        (<LinkedListNode<T>>this.head).previous = null;
+        this.head = this.head[2];
+        (<LinkedListNode<T>>this.head)[0] = null;
       }
-      return removedHead.value;
+      return removedHead[1];
     }
   }
 
@@ -77,10 +91,10 @@ class LinkedList<T> {
       if (this.head === this.tail) {
         this.head = this.tail = null;
       } else {
-        this.tail = this.tail.previous;
-        (<LinkedListNode<T>>this.tail).next = null;
+        this.tail = this.tail[0];
+        (<LinkedListNode<T>>this.tail)[2] = null;
       }
-      return removedTail.value;
+      return removedTail[1];
     }
   }
 
@@ -102,12 +116,12 @@ class LinkedList<T> {
         }
         index += deleteCount;
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode[2];
     }
     if (deletedNode && newConnect) {
-      if (deletedNode.previous) {
-        deletedNode.previous.next = newConnect;
-        newConnect.previous = deletedNode.previous;
+      if (deletedNode[0]) {
+        deletedNode[0][2] = newConnect;
+        newConnect[0] = deletedNode[0];
         return true;
       } else if (deletedNode === this.head) {
         this.head = newConnect;
@@ -122,8 +136,8 @@ class LinkedList<T> {
       if (clean) {
         let currentNode = this.tail;
         while (currentNode) {
-          currentNode.next = null;
-          currentNode = currentNode.previous;
+          currentNode[2] = null;
+          currentNode = currentNode[0];
         }
       } else {
         this.tail = this.head = null;
@@ -135,10 +149,10 @@ class LinkedList<T> {
   public indexOf(value: T): number {
     let currentNode = this.head;
     for (let index = 0; currentNode; index++) {
-      if (currentNode.value === value) {
+      if (currentNode[1] === value) {
         return index;
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode[2];
     }
     return -1;
   }
@@ -147,11 +161,11 @@ class LinkedList<T> {
     let currentNode = this.head;
     for (let i = 0; currentNode; i++) {
       if (i === index) {
-        return currentNode.value;
+        return currentNode[1];
       } else if (i > index) {
         return null;
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode[2];
     }
     return null;
   }
@@ -163,10 +177,10 @@ class LinkedList<T> {
   public search(value: T): LinkedListNode<T> | null {
     let currentNode = this.head;
     for (let index = 0; currentNode; index++) {
-      if (currentNode.value === value) {
+      if (currentNode[1] === value) {
         return currentNode;
       }
-      currentNode = currentNode.next;
+      currentNode = currentNode[2];
     }
     return null;
   }
@@ -185,8 +199,8 @@ class LinkedList<T> {
   ): void {
     let currentNode = this.head;
     for (let i = 0; currentNode; i++) {
-      callback(currentNode.value, currentNode.previous, currentNode.next, i);
-      currentNode = currentNode.next;
+      callback(currentNode[1], currentNode[0], currentNode[2], i);
+      currentNode = currentNode[2];
     }
   }
 
@@ -200,20 +214,5 @@ class LinkedList<T> {
 
   public toString(): string {
     return this.toArray().toString();
-  }
-}
-
-class LinkedListNode<T> {
-  value: T;
-  previous: LinkedListNode<T> | null;
-  next: LinkedListNode<T> | null;
-  constructor(
-    value: T,
-    prev: LinkedListNode<T> | null = null,
-    next: LinkedListNode<T> | null = null
-  ) {
-    this.value = value;
-    this.previous = prev;
-    this.next = next;
   }
 }

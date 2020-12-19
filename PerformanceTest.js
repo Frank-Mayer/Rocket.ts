@@ -13,7 +13,6 @@ const consumer = {
 const nf = Intl.NumberFormat();
 let heavy = 0;
 let maxRandom = 1000;
-const test = new Map();
 
 function clock(start) {
   if (start) {
@@ -38,7 +37,7 @@ const hr = (str) => {
 };
 
 function testList() {
-  md = "| Class | Function";
+  let md = "| Class | Function";
 
   for (heavy of heavySet) {
     let it = nf.format(heavy);
@@ -53,6 +52,9 @@ function testList() {
   md += "SortedList | add";
   for (heavy of heavySet) {
     let x = new SortedList();
+    randomLoop((r) => {
+      consumer.consume(x.add(r));
+    });
     let start = clock();
     randomLoop((r) => {
       consumer.consume(x.add(r));
@@ -63,6 +65,9 @@ function testList() {
   md += "\nLinkedList | append";
   for (heavy of heavySet) {
     let x = new LinkedList();
+    randomLoop((r) => {
+      consumer.consume(x.append(r));
+    });
     let start = clock();
     randomLoop((r) => {
       consumer.consume(x.append(r));
@@ -73,6 +78,9 @@ function testList() {
   // md += "\nHashSet | add";
   // for (heavy of heavySet) {
   //   let x = new HashSet();
+  //   randomLoop((r) => {
+  //     x.add(r);
+  //   });
   //   let start = clock();
   //   randomLoop((r) => {
   //     x.add(r);
@@ -83,6 +91,9 @@ function testList() {
   md += "\nArray | push";
   for (heavy of heavySet) {
     let x = new Array();
+    randomLoop((r) => {
+      consumer.consume(x.push(r));
+    });
     let start = clock();
     randomLoop((r) => {
       consumer.consume(x.push(r));
@@ -98,6 +109,9 @@ function testList() {
     randomLoop((r) => {
       x.add(r);
     });
+    randomLoop((r) => {
+      consumer.consume(x.includes(r));
+    });
     let start = clock();
     randomLoop((r) => {
       consumer.consume(x.includes(r));
@@ -110,6 +124,9 @@ function testList() {
     let x = new LinkedList();
     randomLoop((r) => {
       x.append(r);
+    });
+    randomLoop((r) => {
+      consumer.consume(x.includes(r));
     });
     let start = clock();
     randomLoop((r) => {
@@ -124,6 +141,9 @@ function testList() {
   //   randomLoop((r) => {
   //     x.add(r);
   //   });
+  //   randomLoop((r) => {
+  //     consumer.consume(x.includes(r));
+  //   });
   //   let start = clock();
   //   randomLoop((r) => {
   //     consumer.consume(x.includes(r));
@@ -137,6 +157,9 @@ function testList() {
   //   randomLoop((r) => {
   //     x.add(r);
   //   });
+  //   randomLoop((r) => {
+  //     consumer.consume(x.contains(r));
+  //   });
   //   let start = clock();
   //   randomLoop((r) => {
   //     consumer.consume(x.contains(r));
@@ -149,6 +172,9 @@ function testList() {
     let x = new Array();
     randomLoop((r) => {
       x.push(r);
+    });
+    randomLoop((r) => {
+      consumer.consume(x.includes(r));
     });
     let start = clock();
     randomLoop((r) => {
@@ -165,6 +191,9 @@ function testList() {
     randomLoop((r) => {
       x.add(r);
     });
+    randomLoop((r) => {
+      consumer.consume(x.indexOf(r));
+    });
     let start = clock();
     randomLoop((r) => {
       consumer.consume(x.indexOf(r));
@@ -177,6 +206,9 @@ function testList() {
     let x = new LinkedList();
     randomLoop((r) => {
       x.append(r);
+    });
+    randomLoop((r) => {
+      consumer.consume(x.indexOf(r));
     });
     let start = clock();
     randomLoop((r) => {
@@ -196,6 +228,9 @@ function testList() {
     randomLoop((r) => {
       x.push(r);
     });
+    randomLoop((r) => {
+      consumer.consume(x.indexOf(r));
+    });
     let start = clock();
     randomLoop((r) => {
       consumer.consume(x.indexOf(r));
@@ -206,11 +241,20 @@ function testList() {
   return md;
 }
 
+let heavySet = [100, 1000, 10000, 100000, 1000000];
+
+console.log("Warmup...");
+for (let i = 0; i < 2; i++) {
+  testList();
+}
+
 import os from "os";
+
+console.log("Testing...");
 
 let md =
   "# Rocket.ts\n\nTypeScript functions and classes for better performance\n\n## Performance Test";
-md += "\n\n Compiled for: ES2018";
+md += "\n\n Compiled for: ESNEXT";
 md += "\n\n Platform: " + process.platform.toString();
 md += "\n\n Hardware: " + os.cpus()[0].model;
 let v = process.versions;
@@ -218,8 +262,8 @@ md += "\n\n Node.js: " + v.node;
 md += "\n\n V8: " + v.v8;
 md += "\n\n";
 
-let heavySet = [100, 1000, 10000, 100000, 1000000];
 md += testList();
+md += "\n";
 
 fs.writeFile("README.md", md, (err) => {
   if (err) {

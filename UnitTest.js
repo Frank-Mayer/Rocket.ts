@@ -1,12 +1,5 @@
 "use strict";
-import {
-  rocket_HashMap,
-  rocket_SortedList,
-  rocket_Stack,
-  rocket_Queue,
-  rocket_Pointer,
-  rocket_doOnce,
-} from "./out/rocket.js";
+import { HashMap, SortedList, Stack, Queue, doOnce } from "./out/rocket.js";
 
 let failed = 0;
 
@@ -36,7 +29,7 @@ const test = (operation, expectation) => {
   }
 };
 
-const hashMap = new rocket_HashMap(32);
+const hashMap = new HashMap(32);
 hashMap.set("meep", "12345");
 hashMap.set(33, 4204);
 hashMap.set("mep", "lfnrnrg");
@@ -45,7 +38,7 @@ test(hashMap.length, 3);
 test(hashMap.pop(33), 4204);
 test(hashMap.length, 2);
 
-const sortedList = new rocket_SortedList();
+const sortedList = new SortedList();
 sortedList.add("tux");
 sortedList.add("seehorse");
 sortedList.add("apple");
@@ -62,13 +55,13 @@ test(sortedList.indexOf("ahoi"), 0);
 test(sortedList.indexOf("turtle"), 5);
 test(sortedList.indexOf("apple"), 1);
 
-const stack = new rocket_Stack();
+const stack = new Stack();
 stack.push("meep");
 test(stack.peek(), "meep");
 test(stack.pop(), "meep");
 test(stack.length, 0);
 
-const queue = new rocket_Queue();
+const queue = new Queue();
 queue.enqueue("dog");
 queue.enqueue("cat");
 queue.enqueue("bird");
@@ -76,17 +69,17 @@ test(queue.dequeue(), "dog");
 test(queue.dequeue(), "cat");
 test(queue.dequeue(), "bird");
 
-// let m = new rocket_HashMap();
+// let m = new HashMap();
 // m.set("50", "uefiefeuinfenfie");
 // m.set(2424, "uefienfie");
-// let ptr = rocket_Pointer.reference(m);
+// let ptr = Pointer.reference(m);
 // test(ptr.dereference().get(2424), m.get(2424));
-// let ptr2 = new rocket_Pointer(ptr.address);
+// let ptr2 = new Pointer(ptr.address);
 // test(ptr2.dereference().get(2424), m.get(2424));
 
 let shouldExec = true;
 for (let i = 0; i < 3; i++) {
-  rocket_doOnce(() => {
+  doOnce(() => {
     test(true, shouldExec);
   });
   shouldExec = false;

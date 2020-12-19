@@ -1,6 +1,10 @@
-const IDB = {
+class IDB {
+  protected readonly dbName: string;
+  constructor(dbName: string) {
+    this.dbName = dbName;
+  }
   get<T>(id: string): Promise<T> {
-    const storeName = "pref";
+    const storeName = this.dbName;
     return new Promise(function (resolve, reject) {
       var dbRequest = indexedDB.open(storeName);
 
@@ -30,12 +34,12 @@ const IDB = {
         };
       };
     });
-  },
+  }
   set(id: string, value: any): Promise<void> {
     const object = JSON.parse(
       `{"id":"${id}","value":${JSON.stringify(value)}}`
     );
-    const storeName = "pref";
+    const storeName = this.dbName;
     return new Promise(function (resolve, reject) {
       if (!object.id) {
         reject(Error("object has no id."));
@@ -68,5 +72,5 @@ const IDB = {
         };
       };
     });
-  },
-};
+  }
+}
