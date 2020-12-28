@@ -5,8 +5,10 @@ class SortedList<T> {
   private list: Array<T>;
   private hasChangedSinceLastSort: boolean;
   public length: number;
+  key: keyof T | undefined;
 
-  constructor(template: Array<T> = new Array<T>()) {
+  constructor(key?: keyof T, template: Array<T> = new Array<T>()) {
+    this.key = key;
     this.hasChangedSinceLastSort = false;
     this.list = template;
     this.length = this.list.length;
@@ -20,31 +22,10 @@ class SortedList<T> {
     return this.list.values();
   }
 
-  public add(value: T, insertSorted: boolean = false): number {
+  public add(value: T): number {
     this.length++;
-    if (insertSorted) {
-      if (this.length === 1) {
-        this.list = [value];
-        return this.length;
-      }
-      this.sort();
-      let firstIndex = 0;
-      let lastIndex = this.list.length - 1;
-      let middleIndex = Math.floor((lastIndex + firstIndex) / 2);
-
-      while (this.list[middleIndex] !== value && firstIndex <= lastIndex) {
-        if (value < this.list[middleIndex]) {
-          lastIndex = middleIndex - 1;
-        } else if (value > this.list[middleIndex]) {
-          firstIndex = middleIndex + 1;
-        }
-        middleIndex = Math.floor((lastIndex + firstIndex) / 2);
-      }
-      this.list.splice(Math.max(0, middleIndex + 1), 0, value);
-    } else {
-      this.list.push(value);
-      this.hasChangedSinceLastSort = true;
-    }
+    this.list.push(value);
+    this.hasChangedSinceLastSort = true;
     return this.length;
   }
 
@@ -58,9 +39,27 @@ class SortedList<T> {
     return false;
   }
 
+  private getSortingValueOf(a: T): string | T[keyof T] {
+    if (this.key) {
+      return a[<keyof T>this.key];
+    } else {
+      return JSON.stringify(a);
+    }
+  }
+
   public sort(): void {
     if (this.hasChangedSinceLastSort && this.length > 1) {
-      this.list.sort();
+      this.list.sort((A, B) => {
+        const a = this.getSortingValueOf(A);
+        const b = this.getSortingValueOf(B);
+        if (a > b) {
+          return 1;
+        }
+        if (a < b) {
+          return -1;
+        }
+        return 0;
+      });
       this.hasChangedSinceLastSort = false;
     }
   }
@@ -70,37 +69,28 @@ class SortedList<T> {
       return -1;
     }
     this.sort();
+    const lookingFor = this.getSortingValueOf(value);
     let firstIndex = 0;
     let lastIndex = this.list.length - 1;
     let middleIndex = Math.floor((lastIndex + firstIndex) / 2);
 
-    while (this.list[middleIndex] !== value && firstIndex < lastIndex) {
-      if (value < this.list[middleIndex]) {
+    while (
+      this.getSortingValueOf(this.list[middleIndex]) !== lookingFor &&
+      firstIndex < lastIndex
+    ) {
+      if (lookingFor < this.getSortingValueOf(this.list[middleIndex])) {
         lastIndex = middleIndex - 1;
-      } else if (value > this.list[middleIndex]) {
+      } else if (lookingFor > this.getSortingValueOf(this.list[middleIndex])) {
         firstIndex = middleIndex + 1;
       }
       middleIndex = Math.floor((lastIndex + firstIndex) / 2);
     }
-    return this.list[middleIndex] !== value ? -1 : middleIndex;
+    return this.getSortingValueOf(this.list[middleIndex]) !== lookingFor
+      ? -1
+      : middleIndex;
   }
 
   public includes(value: T): boolean {
-    if (this.length === 0) {
-      return false;
-    }
-    this.sort();
-    let firstIndex = 0;
-    let lastIndex = this.list.length - 1;
-    let middleIndex = Math.floor((lastIndex + firstIndex) / 2);
-    while (this.list[middleIndex] !== value && firstIndex < lastIndex) {
-      if (value < this.list[middleIndex]) {
-        lastIndex = middleIndex - 1;
-      } else if (value > this.list[middleIndex]) {
-        firstIndex = middleIndex + 1;
-      }
-      middleIndex = Math.floor((lastIndex + firstIndex) / 2);
-    }
-    return this.list[middleIndex] === value;
+    return this.indexOf(value) >= 0;
   }
 }

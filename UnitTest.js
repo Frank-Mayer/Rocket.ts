@@ -55,6 +55,25 @@ test(sortedList.indexOf("ahoi"), 0);
 test(sortedList.indexOf("turtle"), 5);
 test(sortedList.indexOf("apple"), 1);
 
+const sortedListOfObj = new SortedList("id");
+const t1 = {
+  id: 13,
+  test: { title: "Tschu Tschu", greeting: "Servus" },
+};
+const t2 = {
+  id: 512,
+  test: { title: "Tschu Tschu", greeting: "Hello" },
+};
+sortedListOfObj.add({ id: 143, test: { title: "Meep", greeting: "Ahoi" } });
+sortedListOfObj.add(t1);
+sortedListOfObj.add({
+  id: 1024,
+  test: { title: "Tschu Tschu", greeting: "Helo" },
+});
+sortedListOfObj.add(t2);
+test(sortedListOfObj.indexOf(t1), 0);
+test(sortedListOfObj.indexOf(t2), 2);
+
 const stack = new Stack();
 stack.push("meep");
 test(stack.peek(), "meep");
