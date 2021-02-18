@@ -6,8 +6,9 @@ interface Math {
    * @param max The upper bound of the result
    */
   clamp: <T extends number | bigint>(value: T, min: T, max: T) => T;
-}
 
-Math.clamp = function <T extends number | bigint>(value: T, min: T, max: T): T {
-  return value < min ? min : value > max ? max : value;
-};
+  /**
+   * Euclidean algorithm
+   */
+  gcd: (a: number, b: number) => number;
+}

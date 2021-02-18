@@ -103,3 +103,7 @@ for (let i = 0; i < 3; i++) {
   });
   shouldExec = false;
 }
+
+test(Math.gcd(156, 66), 6);
+test(Math.gcd(12, 6), 6);
+test(Math.gcd(9, 3), 3);

@@ -39,6 +39,30 @@ class SortedList<T> {
     return false;
   }
 
+  public pop(amount: number): Set<T> {
+    this.sort();
+    const ret = new Set<T>();
+    for (let i = 0; i < amount; i++) {
+      const el = this.list.pop();
+      if (el) {
+        ret.add(el);
+      }
+    }
+    return ret;
+  }
+
+  public shift(amount: number): Set<T> {
+    this.sort();
+    const ret = new Set<T>();
+    for (let i = 0; i < amount; i++) {
+      const el = this.list.shift();
+      if (el) {
+        ret.add(el);
+      }
+    }
+    return ret;
+  }
+
   private getSortingValueOf(a: T): string | T[keyof T] {
     if (this.key) {
       return a[<keyof T>this.key];
@@ -62,6 +86,14 @@ class SortedList<T> {
       });
       this.hasChangedSinceLastSort = false;
     }
+  }
+
+  public getAt(index: number): T | null {
+    if (index >= 0 && index < this.length) {
+      this.sort();
+      return this.list[index];
+    }
+    return null;
   }
 
   public indexOf(value: T): number {

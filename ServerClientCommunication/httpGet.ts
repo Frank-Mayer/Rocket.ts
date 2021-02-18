@@ -5,7 +5,7 @@ const __httpGetCache = new HashMap();
  * @param url Url to send the request to
  * @param cached Whether you want the response to be cached or not
  */
-async function httpGet(url: string, cached: boolean = false) {
+function httpGet(url: string, cached: boolean = false) {
   return new Promise(function (
     resolve: (value: string) => void,
     reject: (reason?: any) => void
@@ -37,4 +37,17 @@ async function httpGet(url: string, cached: boolean = false) {
     xmlHttp.open("GET", url, true);
     xmlHttp.send(null);
   });
+}
+
+/**
+ *Sends an asynchronous http-get request to a given url
+ * @param url Url to send the request to
+ * @param cached Whether you want the response to be cached or not
+ * @returns Parsed JSON Object from request
+ */
+async function httpGetParsed<T>(
+  url: string,
+  cached: boolean = false
+): Promise<T> {
+  return <T>JSON.parse(await httpGet(url, cached));
 }

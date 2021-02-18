@@ -6,7 +6,7 @@ import fs from "fs";
 const consumer = {
   store: 0,
   consume(v) {
-    this.store += v;
+    this.store = v;
   },
 };
 
@@ -241,6 +241,28 @@ function testList() {
   return md;
 }
 
+function testGcd() {
+  const rand = new Array();
+  for (let i = 0; i < 1000; i++) {
+    rand.push(Math.round(Math.random() * 1000));
+  }
+
+  // Warmup
+  for (let i = 0; i < rand.length; i++) {
+    consumer.consume(Math.gcd(rand[i], rand[rand.length - i]));
+  }
+
+  let md = "Function Name | Execution Time\n|---|---";
+  const times = new Array();
+  for (let i = 0; i < rand.length; i++) {
+    let start = clock();
+    consumer.consume(Math.gcd(rand[i], rand[rand.length - i]));
+    times.push(clock(start));
+  }
+  md += "\n" + times.average().toString() + "ms";
+  return md;
+}
+
 let heavySet = [100, 1000, 10000, 100000, 1000000];
 
 console.log("Warmup...");
@@ -249,6 +271,7 @@ for (let i = 0; i < 2; i++) {
 }
 
 import os from "os";
+import { time } from "console";
 
 console.log("Testing...");
 
@@ -263,6 +286,8 @@ md += "\n\n V8: " + v.v8;
 md += "\n\n";
 
 md += testList();
+md += "\n";
+md += testGcd();
 md += "\n";
 
 fs.writeFile("README.md", md, (err) => {
