@@ -1,6 +1,8 @@
 # Rocket.ts
 
-TypeScript functions and classes for better performance
+TypeScript functions and classes for better performance and ease of use
+
+Documentation in the [Wiki](https://github.com/Frank-Mayer/Rocket.ts/wiki)
 
 ## Performance Test
 
