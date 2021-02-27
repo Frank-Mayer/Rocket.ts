@@ -15,5 +15,5 @@ interface Math {
   /**
    * Round to a specified precition
    */
-  roundOff: (x: number, precition: number) => number;
+  roundOff: (x: number, precision: number) => number;
 }
