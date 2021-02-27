@@ -11,4 +11,9 @@ interface Math {
    * Euclidean algorithm
    */
   gcd: (a: number, b: number) => number;
+
+  /**
+   * Round to a specified precition
+   */
+  roundOff: (x: number, precition: number) => number;
 }

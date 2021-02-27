@@ -1,3 +1,5 @@
+/// <reference path="Array.d.ts" />
+
 Array.prototype.shuffle = function <T>(): Array<T> {
   const array = this;
   let counter = array.length;

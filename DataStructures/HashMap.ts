@@ -1,3 +1,6 @@
+/// <reference path="../Algorithm/hash.ts"/>
+/// <reference path="SortedList.ts"/>
+
 /**
  * Represents a collection of key/value pairs that are organized based on the hash code of the key
  */

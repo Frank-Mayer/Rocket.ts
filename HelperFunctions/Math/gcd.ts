@@ -1,3 +1,5 @@
+/// <reference path="Math.d.ts" />
+
 Math.gcd = (a: number, b: number): number => {
   while (a > 0 && b > 0) {
     if (a > b) {
