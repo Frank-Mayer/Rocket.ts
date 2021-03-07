@@ -1,16 +1,19 @@
 function when<T, C>(
   condition: C,
-  ...cases: Array<{ if: C; then: (() => T | null) | T }>
+  ...cases: Array<{ if: C | (() => C); then: (() => T | null) | T }>
 ): T | null {
   if (typeof condition == "undefined" || condition == null) {
     for (const c of cases) {
-      if (c.if) {
+      if ((typeof c.if == "function" && (<() => C>c.if)()) || c.if) {
         return typeof c.then == "function" ? (<() => T>c.then)() : c.then;
       }
     }
   } else {
     for (const c of cases) {
-      if (condition === c.if) {
+      if (
+        (typeof c.if == "function" && condition === (<() => C>c.if)()) ||
+        condition === c.if
+      ) {
         return typeof c.then == "function" ? (<() => T>c.then)() : c.then;
       }
     }
