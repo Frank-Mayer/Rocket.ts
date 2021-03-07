@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/Frank-Mayer/Rocket.ts/master/rocket.svg" width="128px">
+
 # Rocket.ts
 
 TypeScript functions and classes for better performance and ease of use
