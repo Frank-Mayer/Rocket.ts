@@ -271,7 +271,6 @@ for (let i = 0; i < 2; i++) {
 }
 
 import os from "os";
-import { time } from "console";
 
 console.log("Testing...");
 

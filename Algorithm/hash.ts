@@ -1,7 +1,7 @@
 String.prototype.hash = function (): number {
   let hash = BigInt(0);
   let index = 0;
-  let char = BigInt(0);
+  let char: bigint;
   if (this.length === 0) {
     return 0;
   }
