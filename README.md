@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/Frank-Mayer/Rocket.ts/master/rocket.svg" width="128px">
 
-![twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FFrank-Mayer%2FRocket.ts)
+[![twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FFrank-Mayer%2FRocket.ts)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FFrank-Mayer%2FRocket.ts)
 
 ![lgtm js/ts](https://img.shields.io/lgtm/grade/javascript/github/Frank-Mayer/Rocket.ts.svg?logo=lgtm&logoWidth=18)
 
