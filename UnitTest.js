@@ -1,5 +1,12 @@
 "use strict";
-import { HashMap, SortedList, Stack, Queue, doOnce } from "./out/rocket.js";
+import {
+  HashMap,
+  SortedList,
+  Stack,
+  Queue,
+  doOnce,
+  Trace,
+} from "./out/rocket.js";
 
 let failed = 0;
 
@@ -107,3 +114,13 @@ for (let i = 0; i < 3; i++) {
 test(Math.gcd(156, 66), 6);
 test(Math.gcd(12, 6), 6);
 test(Math.gcd(9, 3), 3);
+
+const trace = new Trace();
+trace.add(5);
+trace.add(423);
+trace.add(666);
+test(JSON.stringify(trace.get()), JSON.stringify([666, 423, 5]));
+trace.add(Math.PI);
+test(JSON.stringify(trace.get()), JSON.stringify([Math.PI, 666, 423, 5]));
+test(trace.peek(3), 5);
+test(trace.peek(0), Math.PI);
