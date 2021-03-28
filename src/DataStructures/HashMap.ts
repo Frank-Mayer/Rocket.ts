@@ -1,4 +1,4 @@
-/// <reference path="../Algorithm/hash.ts"/>
+/// <reference path="../Extensions/String/hash.ts"/>
 /// <reference path="SortedList.ts"/>
 
 /**

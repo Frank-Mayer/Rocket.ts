@@ -1,4 +1,4 @@
-/// <reference path="../Algorithm/hash.ts" />
+/// <reference path="../Extensions/String/hash.ts" />
 
 class HashMatrix<R extends any, C extends any, T extends any> {
   private bucket: Map<string, T>;
