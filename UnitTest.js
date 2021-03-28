@@ -6,6 +6,7 @@ import {
   Queue,
   doOnce,
   Trace,
+  DiffieHellman,
 } from "./out/rocket.js";
 
 let failed = 0;
@@ -124,3 +125,15 @@ trace.add(Math.PI);
 test(JSON.stringify(trace.get()), JSON.stringify([Math.PI, 666, 423, 5]));
 test(trace.peek(3), 5);
 test(trace.peek(0), Math.PI);
+
+test(Math.nextPrime(4n), 5n);
+test(Math.nthPrime(6), 13n);
+test(Math.isPrime(16n), false);
+test(Math.isPrime(13n), true);
+test(Math.fibonacci(12), 144n);
+
+// const DHa = new DiffieHellman();
+// const DHb = new DiffieHellman(DHa.getPrime(), DHa.getGenerator());
+// DHb.setPartnersPublicKey(DHa.getPublicKey());
+// DHa.setPartnersPublicKey(DHb.getPublicKey());
+// test(DHa.getSharedKey(), DHb.getSharedKey());
