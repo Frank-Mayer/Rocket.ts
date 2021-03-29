@@ -125,4 +125,11 @@ class SortedList<T> {
   public includes(value: T): boolean {
     return this.indexOf(value) >= 0;
   }
+
+  public forEach(callback: (Element: T) => void): void {
+    this.sort();
+    for (const el of this.list) {
+      callback(el);
+    }
+  }
 }
