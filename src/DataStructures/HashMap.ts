@@ -2,7 +2,7 @@
 /// <reference path="SortedList.ts"/>
 
 /**
- * Represents a collection of key/value pairs that are organized based on the hash code of the key
+ * Represents a collection of key/value pairs that are organized based on the hash code of the key.
  */
 class HashMap {
   private bucket: any[][][];
@@ -19,6 +19,11 @@ class HashMap {
     return JSON.stringify(value).hash();
   }
 
+  /**
+   * Adds an element with the specified key and value into the Hashtable.
+   * @param key
+   * @param value
+   */
   public set(key: any, value: any): void {
     let index = this.hash(key);
     if (!this.hashList.includes(index)) {
@@ -43,6 +48,11 @@ class HashMap {
     }
   }
 
+  /**
+   * Removes the element with the specified key from the HashMap.
+   * @param key
+   * @returns true if the key was present in the HashMap, false if it wann't.
+   */
   public delete(key: any): boolean {
     let index = this.hash(key);
     if (this.bucket[index] === undefined) {
@@ -63,6 +73,11 @@ class HashMap {
     return false;
   }
 
+  /**
+   * Removes the element with the specified key from the HashMap.
+   * @param key
+   * @returns the removed item or undefined if not found.
+   */
   public pop(key: any): any {
     let index = this.hash(key);
     if (this.bucket[index] === undefined) {
@@ -85,6 +100,11 @@ class HashMap {
     return undefined;
   }
 
+  /**
+   * Search for the value at the given key and returns it.
+   * @param key
+   * @returns the value at the given key or undefined if not found.
+   */
   public get(key: any): any {
     let index = this.hash(key);
     if (this.bucket[index]) {
@@ -97,6 +117,10 @@ class HashMap {
     return undefined;
   }
 
+  /**
+   * Determines whether the HashMap contains a specific key.
+   * @returns true if the key was found, false if not.
+   */
   public has(key: any): boolean {
     let index = this.hash(key);
     if (this.bucket[index]) {
@@ -109,6 +133,9 @@ class HashMap {
     return false;
   }
 
+  /**
+   * Converts the HashMap into a readable, JSON-like string format.
+   */
   public toString(): string {
     let r = "{\n";
     for (const b of this.bucket) {
@@ -122,6 +149,9 @@ class HashMap {
     return r;
   }
 
+  /**
+   * Iterate through the HashMap with a given callback function.
+   */
   public forEach(callback: (el: any[2], map: any[][][]) => void): void {
     if (this.bucket) {
       for (const bucketIndex of this.hashList) {

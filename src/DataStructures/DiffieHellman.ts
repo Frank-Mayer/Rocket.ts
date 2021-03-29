@@ -1,5 +1,8 @@
 /// <reference path="../Extensions/Math/prime.ts" />
 
+/**
+ * Basic implementation of the Diffie-Hellman key exchange
+ */
 class DiffieHellman {
   private privateKey: bigint;
   private prime: bigint;

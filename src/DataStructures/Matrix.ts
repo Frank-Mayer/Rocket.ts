@@ -1,3 +1,6 @@
+/**
+ * Data, stored in a 2D Matrix, indexed by the coordinates
+ */
 class Matrix<T extends any> {
   private bucket: Array<Array<T>>;
 
@@ -16,14 +19,20 @@ class Matrix<T extends any> {
     return arr;
   }
 
-  getRow(index: number): Array<T> | null {
+  /**
+   * Returns the full row at the given index in an Array or undefined if the row doesn't exist.
+   */
+  getRow(index: number): Array<T> | undefined {
     if (index < this.bucket.length) {
       return this.bucket[index];
     }
-    return null;
+    return undefined;
   }
 
-  getColumn(index: number): Array<T> | null {
+  /**
+   * Returns the full column at the given index in an Array or undefined if the column doesn't exist.
+   */
+  getColumn(index: number): Array<T> | undefined {
     const col = new Array<T>();
     for (const row of this.bucket) {
       if (index < row.length) {
@@ -33,19 +42,25 @@ class Matrix<T extends any> {
     if (col.length > 0) {
       return col;
     }
-    return null;
+    return undefined;
   }
 
-  getCell(row: number, column: number): T | null {
+  /**
+   * Returns the cell at a specified location.
+   */
+  getCell(row: number, column: number): T | undefined {
     if (row < this.bucket.length) {
       const rowArr = this.bucket[row];
       if (column < rowArr.length) {
         return rowArr[column];
       }
     }
-    return null;
+    return undefined;
   }
 
+  /**
+   * Sets the cell at a specified location.
+   */
   setCell(row: number, column: number, value: T): void {
     if (row < this.bucket.length) {
       const rowArr = this.bucket[row];

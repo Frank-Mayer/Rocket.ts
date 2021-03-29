@@ -14,11 +14,17 @@ class Queue<T> {
     return this.storage;
   }
 
+  /**
+   * Adds a value to the end of the Queue.
+   */
   public enqueue(element: T): void {
     this.storage.push(element);
     this.length++;
   }
 
+  /**
+   * Removes and returns the item at the beginning of the Queue
+   */
   public dequeue(): T | undefined {
     let removed = this.storage.shift();
     if (removed) {
@@ -29,7 +35,10 @@ class Queue<T> {
     }
   }
 
-  public peek(pos: number = 1): T | undefined {
-    return this.storage[pos - 1];
+  /**
+   * @returns the item at the given index of the Queue without removing it
+   */
+  public peek(index: number = 0): T | undefined {
+    return this.storage[index];
   }
 }

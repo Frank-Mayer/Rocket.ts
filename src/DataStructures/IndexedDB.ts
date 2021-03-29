@@ -1,10 +1,18 @@
+/**
+ * Promise based wrapper around Browsers IndexedDB
+ */
 class IDB<T> {
   protected readonly dbName: string;
   protected readonly dbVersion: number;
+
   constructor(dbName: string, version: number = 1) {
     this.dbName = dbName;
     this.dbVersion = version;
   }
+
+  /**
+   * Gets the value at a given index.
+   */
   get(id: string): Promise<T> {
     const storeName = this.dbName;
     const storeVersion = this.dbVersion;
@@ -41,10 +49,14 @@ class IDB<T> {
       };
     });
   }
+
+  /**
+   * Iterates through the table using a given callback function.
+   */
   select(
     callback: (cursor: IDBCursorWithValue) => void
     // ,where?: string
-  ): Promise<Array<T>> {
+  ): Promise<void> {
     const storeName = this.dbName;
     const storeVersion = this.dbVersion;
     return new Promise(function (resolve, reject) {
@@ -77,7 +89,7 @@ class IDB<T> {
             const cursor = <IDBCursorWithValue>(<any>ev.target).result;
             if (cursor) {
               callback(cursor.value);
-              resolve(cursor.value);
+              resolve();
               cursor.continue();
             }
           }
@@ -88,6 +100,11 @@ class IDB<T> {
       };
     });
   }
+
+  /**
+   * Tries to delete a data at a given id.
+   * @returns true if successful and false if not.
+   */
   delete(id: string): Promise<boolean> {
     const storeName = this.dbName;
     const storeVersion = this.dbVersion;
@@ -122,6 +139,10 @@ class IDB<T> {
       };
     });
   }
+
+  /**
+   * Sets the value at a given id.
+   */
   set(id: string, value: T): Promise<void> {
     const object = JSON.parse(
       `{"id":"${id}","value":${JSON.stringify(value)}}`
@@ -163,7 +184,18 @@ class IDB<T> {
       };
     });
   }
-  update<K extends keyof T, V extends T[K]>(id: string, key: K, newValue: V) {
+
+  /**
+   * Updates the value of a given key and id in the table.
+   * @param id of the table
+   * @param key of the value object
+   * @param newValue of the object at the given key
+   */
+  update<K extends keyof T, V extends T[K]>(
+    id: string,
+    key: K,
+    newValue: V
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
       this.get(id)
         .then((obj) => {

@@ -1,3 +1,6 @@
+/**
+ * Readonly List
+ */
 class ImmutableList<T> {
   private readonly bucket: Array<T>;
 
@@ -21,22 +24,34 @@ class ImmutableList<T> {
     return this.value();
   }
 
+  /**
+   * @returns a copy of the values.
+   */
   value(): Array<T> {
     return [...this.bucket];
   }
 
+  /**
+   * @returns a concatination of its values plus a given dataset.
+   */
   plus(valueToAdd: Array<T> | ImmutableList<T> | T): ImmutableList<T> {
     return new ImmutableList(this.value(), valueToAdd);
   }
 
+  /**
+   * Iterates through the list using a given callback function.
+   */
   forEach(callback: (element: T) => void): void {
-    for (const el of this.bucket) {
+    for (const el of this.value()) {
       callback(el);
     }
   }
 
+  /**
+   * Iterates asynchronously through the list using a given callback function.
+   */
   async forEachAsync(callback: (element: T) => void): Promise<void> {
-    for await (const el of this.bucket) {
+    for await (const el of this.value()) {
       callback(el);
     }
   }

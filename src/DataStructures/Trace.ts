@@ -1,3 +1,6 @@
+/**
+ * Represents a typed List with a static length cap
+ */
 class Trace<T> {
   private bucket = new Array<T>();
   private size: number;

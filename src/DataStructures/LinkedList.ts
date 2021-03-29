@@ -1,19 +1,19 @@
 declare type LinkedListNode<T> = [
-  LinkedListNode<T> | null,
+  LinkedListNode<T> | undefined,
   T,
-  LinkedListNode<T> | null
+  LinkedListNode<T> | undefined
 ];
 
 /**
  * Represents a doubly linked list
  */
 class LinkedList<T> {
-  protected head: LinkedListNode<T> | null;
-  protected tail: LinkedListNode<T> | null;
+  protected head: LinkedListNode<T> | undefined;
+  protected tail: LinkedListNode<T> | undefined;
   public length: number;
 
-  constructor(content: Array<T> | null = null) {
-    this.head = this.tail = null;
+  constructor(content?: Array<T>) {
+    this.head = this.tail = undefined;
     if (content) {
       for (const value of content) {
         this.append(value);
@@ -26,12 +26,15 @@ class LinkedList<T> {
 
   private LinkedListNode(
     value: T,
-    prev: LinkedListNode<T> | null = null,
-    next: LinkedListNode<T> | null = null
+    prev: LinkedListNode<T> | undefined = undefined,
+    next: LinkedListNode<T> | undefined = undefined
   ): LinkedListNode<T> {
     return [prev, value, next];
   }
 
+  /**
+   * Initializes a new instance of the LinkedList class that contains a given value.
+   */
   static of<T>(value: T): LinkedList<T> {
     return new LinkedList<T>([value]);
   }
@@ -40,6 +43,9 @@ class LinkedList<T> {
     return this.toArray();
   }
 
+  /**
+   * Adds a new node containing the specified value at the end of the LinkedList.
+   */
   public append(value: T): void {
     if (!this.tail) {
       this.head = this.tail = this.LinkedListNode(value);
@@ -52,6 +58,9 @@ class LinkedList<T> {
     this.length++;
   }
 
+  /**
+   * Adds a new node containing the specified value at the start of the LinkedList.
+   */
   public prepend(value: T): void {
     if (!this.head) {
       this.head = this.tail = this.LinkedListNode(value);
@@ -64,46 +73,58 @@ class LinkedList<T> {
     this.length++;
   }
 
-  public deleteHead(): T | null {
+  /**
+   * Deletes the head node, node before becomes new head.
+   */
+  public deleteHead(): T | undefined {
     this.length--;
     if (!this.head) {
-      return null;
+      return undefined;
     } else {
       const removedHead = this.head;
       // if one node left
       if (this.head === this.tail) {
-        this.head = this.tail = null;
+        this.head = this.tail = undefined;
       } else {
         this.head = this.head[2];
-        (<LinkedListNode<T>>this.head)[0] = null;
+        (<LinkedListNode<T>>this.head)[0] = undefined;
       }
       return removedHead[1];
     }
   }
 
-  public deleteTail(): T | null {
+  /**
+   * Deletes the tail node, node before becomes new tail.
+   */
+  public deleteTail(): T | undefined {
     this.length--;
     if (!this.tail) {
-      return null;
+      return undefined;
     } else {
       const removedTail = this.tail;
       // if one node left
       if (this.head === this.tail) {
-        this.head = this.tail = null;
+        this.head = this.tail = undefined;
       } else {
         this.tail = this.tail[0];
-        (<LinkedListNode<T>>this.tail)[2] = null;
+        (<LinkedListNode<T>>this.tail)[2] = undefined;
       }
       return removedTail[1];
     }
   }
 
+  /**
+   * Cuts out a specific area of the LinkedList with a given index and the amount of nodes to delete.
+   * @param start index to start
+   * @param deleteCount
+   * @returns true if the action was possible, false if not.
+   */
   public splice(start: number, deleteCount: number = 1): boolean {
     if (start < 0 || (deleteCount && deleteCount < 1)) {
       return false;
     }
-    let deletedNode: LinkedListNode<T> | null = null;
-    let newConnect: LinkedListNode<T> | null = null;
+    let deletedNode: LinkedListNode<T> | undefined = undefined;
+    let newConnect: LinkedListNode<T> | undefined = undefined;
     let currentNode = this.head;
     let index = start;
     for (let i = 0; currentNode; i++) {
@@ -131,21 +152,19 @@ class LinkedList<T> {
     return false;
   }
 
-  public clear(clean?: boolean): void {
+  /**
+   * Removes all nodes from the LinkedList.
+   */
+  public clear(): void {
     if (this.head) {
-      if (clean) {
-        let currentNode = this.tail;
-        while (currentNode) {
-          currentNode[2] = null;
-          currentNode = currentNode[0];
-        }
-      } else {
-        this.tail = this.head = null;
-      }
+      this.tail = this.head = undefined;
     }
     this.length = 0;
   }
 
+  /**
+   * Finds the first node that contains the specified value.
+   */
   public indexOf(value: T): number {
     let currentNode = this.head;
     for (let index = 0; currentNode; index++) {
@@ -157,24 +176,33 @@ class LinkedList<T> {
     return -1;
   }
 
-  public at(index: number): T | null {
+  /**
+   * Finds the node at the given index
+   */
+  public at(index: number): T | undefined {
     let currentNode = this.head;
     for (let i = 0; currentNode; i++) {
       if (i === index) {
         return currentNode[1];
       } else if (i > index) {
-        return null;
+        return undefined;
       }
       currentNode = currentNode[2];
     }
-    return null;
+    return undefined;
   }
 
+  /**
+   * Determines whether a value is in the LinkedList
+   */
   public includes(value: T): boolean {
     return this.indexOf(value) >= 0;
   }
 
-  public search(value: T): LinkedListNode<T> | null {
+  /**
+   * Finds the first node that contains the specified value and returns a reference to it.
+   */
+  public search(value: T): LinkedListNode<T> | undefined {
     let currentNode = this.head;
     for (let index = 0; currentNode; index++) {
       if (currentNode[1] === value) {
@@ -182,18 +210,24 @@ class LinkedList<T> {
       }
       currentNode = currentNode[2];
     }
-    return null;
+    return undefined;
   }
 
+  /**
+   * Checks whether the List contains nodes or not.
+   */
   public isEmpty(): boolean {
     return !this.head;
   }
 
+  /**
+   * Iterates through the list using a given callback function.
+   */
   public forEach(
     callback: (
       value: T,
-      prev: LinkedListNode<T> | null,
-      next: LinkedListNode<T> | null,
+      prev: LinkedListNode<T> | undefined,
+      next: LinkedListNode<T> | undefined,
       index: number
     ) => void
   ): void {
@@ -204,6 +238,9 @@ class LinkedList<T> {
     }
   }
 
+  /**
+   * @returns a new Array using the LinkedLists nodes.
+   */
   public toArray(): Array<T> {
     const r = new Array<T>();
     this.forEach((v) => {
