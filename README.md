@@ -1,16 +1,15 @@
 <img src="https://raw.githubusercontent.com/Frank-Mayer/Rocket.ts/master/rocket.svg" width="128px">
 
-[![twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FFrank-Mayer%2FRocket.ts)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FFrank-Mayer%2FRocket.ts)
-
-![lgtm js/ts](https://img.shields.io/lgtm/grade/javascript/github/Frank-Mayer/Rocket.ts.svg?logo=lgtm&logoWidth=18)
-
-![lgtm py](https://img.shields.io/lgtm/grade/python/g/Frank-Mayer/Rocket.ts.svg?logo=lgtm&logoWidth=18)
-
 # Rocket.ts
 
-TypeScript functions and classes for better performance and ease of use
+TypeScript Framework for better performance and ease of use
 
 Documentation in the [Wiki](https://github.com/Frank-Mayer/Rocket.ts/wiki)
+
+## Cool stuff
+
+* [HTMLFrame](https://github.com/Frank-Mayer/Rocket.ts/wiki/HTMLFrame): Inject code from another File into a DOM Element. Without emitting.
+* [SortedList](https://github.com/Frank-Mayer/Rocket.ts/wiki/SortedList): Self-sorting, mutable, typed List of variable length. Using Binary search for fester lookups on high usage.
 
 ## Performance Test
 
