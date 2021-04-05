@@ -2,25 +2,33 @@
 
 class HTMLFrame {
   private readonly element: HTMLElement;
+  private readonly basePath: string;
   private current?: string = undefined;
 
-  constructor(selector: string) {
+  constructor(
+    selector: string,
+    basePath: string = location.href
+      .split("#")[0]
+      .split("?")[0]
+      .replace("/index.html", "/")
+  ) {
     const el = <HTMLElement | null>document.querySelector(selector);
     if (!el) {
       throw new Error(`Element ${selector} not found`);
     }
     this.element = el;
+    this.basePath = basePath;
   }
 
-  async inject(url: string): Promise<boolean> {
-    if (url == this.current) {
+  async inject(path: string): Promise<boolean> {
+    if (path == this.current) {
       return true;
     }
 
     try {
-      const code = await httpGet(url, true);
+      const code = await httpGet(this.basePath + path, true);
       this.element.innerHTML = code;
-      this.current = url;
+      this.current = path;
       return true;
     } catch {
       return false;
