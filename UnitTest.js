@@ -132,8 +132,8 @@ test(Math.isPrime(16n), false);
 test(Math.isPrime(13n), true);
 test(Math.fibonacci(12), 144n);
 
-console.debug("meep".hash());
-console.debug("iliketurtles".hash());
+test("meep".hash(), 2150831171);
+test("iliketurtles".hash(), 1700752183);
 
 // const DHa = new DiffieHellman();
 // const DHb = new DiffieHellman(DHa.getPrime(), DHa.getGenerator());
