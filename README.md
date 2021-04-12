@@ -2,7 +2,7 @@
 
 # Rocket.ts
 
-TypeScript Framework for better performance and ease of use
+TypeScript Library for better performance and ease of use
 
 Documentation in the [Wiki](https://github.com/Frank-Mayer/Rocket.ts/wiki)
 
