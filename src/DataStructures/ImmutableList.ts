@@ -11,7 +11,7 @@ class ImmutableList<T> {
       if (Array.isArray(val)) {
         newValues = newValues.concat(val);
       } else if (val instanceof ImmutableList) {
-        newValues.concat(val.value());
+        newValues = newValues.concat(val.value());
       } else {
         newValues.push(val);
       }

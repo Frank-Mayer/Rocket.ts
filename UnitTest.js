@@ -6,7 +6,6 @@ import {
   Queue,
   doOnce,
   Trace,
-  DiffieHellman,
 } from "./out/rocket.js";
 
 let failed = 0;
